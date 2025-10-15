@@ -211,6 +211,25 @@ body {
   padding: 0;
 }
 
+/* Force dark theme for the application */
+html[data-color-scheme="dark"],
+html {
+  --color-background: #1a1a1a !important;
+  --color-surface: #2d2d2d !important;
+  --color-text: #f0f0f0 !important;
+  --color-text-secondary: #b0b0b0 !important;
+  --color-primary: #4A90E2 !important;
+  --color-primary-hover: #357abd !important;
+  --color-primary-active: #2968a3 !important;
+  --color-secondary: #5d5d5d !important;
+  --color-secondary-hover: #6d6d6d !important;
+  --color-secondary-active: #4d4d4d !important;
+  --color-border: #d0d0d0 !important;
+  --color-card-border: #d0d0d0 !important;
+  --color-card-border-inner: #d0d0d0 !important;
+  --color-btn-primary-text: #f0f0f0 !important;
+}
+
 *,
 *::before,
 *::after {
@@ -224,10 +243,10 @@ body {
 }
 
 .header {
-  background: var(--color-bg-5);
+  background: #2d2d2d;
   padding: var(--space-24) var(--space-16);
   text-align: center;
-  border-bottom: 2px solid var(--color-primary);
+  border-bottom: 2px solid #4A90E2;
 }
 
 .header h1 {
@@ -311,11 +330,11 @@ body {
 }
 
 .challenge-question {
-  background: var(--color-bg-1);
+  background: #2d2d2d;
   padding: var(--space-20);
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-24);
-  border: 1px solid var(--color-card-border);
+  border: 1px solid #d0d0d0;
 }
 
 .challenge-question h3 {
@@ -338,7 +357,7 @@ body {
 
 .word-area {
   background: var(--color-surface);
-  border: 2px solid var(--color-card-border);
+  border: 2px solid #d0d0d0;
   border-radius: var(--radius-lg);
   padding: var(--space-20);
   min-height: 120px;
@@ -351,13 +370,23 @@ body {
 }
 
 .scrambled-area {
-  border-color: var(--color-warning);
-  background: var(--color-bg-6);
+  border-color: #d0d0d0 !important;
+  background: #8B6914 !important;
+  color: #f0f0f0;
+}
+
+.scrambled-area h4 {
+  color: #f0f0f0 !important;
 }
 
 .solution-area {
-  border-color: var(--color-success);
-  background: var(--color-bg-3);
+  border-color: #d0d0d0 !important;
+  background: #1B4332 !important;
+  color: #f0f0f0;
+}
+
+.solution-area h4 {
+  color: #f0f0f0 !important;
 }
 
 .words-container {
@@ -369,8 +398,8 @@ body {
 
 .word-block {
   padding: var(--space-8) var(--space-12);
-  background: var(--color-secondary);
-  border: 1px solid var(--color-border);
+  background: #3d3d3d;
+  border: 1px solid #d0d0d0;
   border-radius: var(--radius-base);
   cursor: pointer;
   user-select: none;
@@ -378,13 +407,13 @@ body {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
-  color: var(--color-text);
+  color: #f0f0f0;
 }
 
 .word-block:hover {
-  background: var(--color-secondary-hover);
+  background: #4d4d4d;
   transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .word-block:active {
@@ -392,9 +421,9 @@ body {
 }
 
 .word-block.in-solution {
-  background: var(--color-bg-3);
-  border-color: var(--color-success);
-  color: var(--color-success);
+  background: #2d5a3d;
+  border-color: #4A90E2;
+  color: #f0f0f0;
 }
 
 .controls {
@@ -427,13 +456,13 @@ body {
 }
 
 .btn-secondary {
-  background: var(--color-secondary);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
+  background: #5d5d5d;
+  color: #f0f0f0;
+  border: 1px solid #d0d0d0;
 }
 
 .btn-secondary:hover {
-  background: var(--color-secondary-hover);
+  background: #6d6d6d;
 }
 
 .btn:disabled {
@@ -448,7 +477,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 1000;
   align-items: center;
   justify-content: center;
@@ -459,14 +488,16 @@ body {
 }
 
 .modal-content {
-  background: var(--color-surface);
+  background: #2d2d2d;
   padding: var(--space-32);
   border-radius: var(--radius-lg);
-  max-width: 500px;
-  width: 90%;
+  max-width: 700px;
+  width: 95%;
+  max-height: 80vh;
+  overflow-y: auto;
   text-align: center;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--color-card-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid #d0d0d0;
 }
 
 .modal-content h3 {
@@ -496,11 +527,11 @@ body {
 }
 
 .explanation {
-  background: var(--color-bg-2);
+  background: #3d3d3d;
   padding: var(--space-16);
   border-radius: var(--radius-base);
   margin: var(--space-16) 0;
-  border: 1px solid var(--color-card-border);
+  border: 1px solid #d0d0d0;
 }
 
 .explanation strong {
@@ -556,11 +587,11 @@ body {
 }
     </style>
 </head>
-<body>
+<body data-color-scheme="dark">
     <div class="app-container">
         <!-- Header -->
         <header class="header">
-            <h1>SQL Puzzle Challenge</h1>
+            <h1>SQL Quiz</h1>
             <p>Rearrange scrambled SQL keywords to master database queries</p>
         </header>
 
@@ -609,6 +640,7 @@ body {
             <div class="controls">
                 <button class="btn btn-secondary" id="reset-btn">Reset</button>
                 <button class="btn btn-primary" id="submit-btn" disabled>Submit Answer</button>
+                <button class="btn btn-secondary" id="end-quiz-btn">End Quiz</button>
                 <button class="btn btn-primary" id="next-btn" style="display: none;">Next Question</button>
             </div>
         </div>
@@ -623,91 +655,201 @@ body {
                     <strong>Explanation:</strong>
                     <p id="explanation-text"></p>
                 </div>
-                <button class="btn btn-primary" id="modal-close">Continue</button>
+                <button class="btn btn-primary" id="modal-close">Next Question</button>
             </div>
         </div>
     </div>
 
     <script>
-        // SQL Questions Data
+        // SQL Questions Data with Detailed Explanations
         const sqlQuestions = [
             {
                 id: 1,
                 instruction: "Create a basic SELECT query to get all columns from the users table",
                 scrambled: ["*", "users", "select", "from"],
                 correct: ["select", "*", "from", "users"],
-                explanation: "SELECT * FROM users - Gets all columns from the users table"
+                explanation: "Basic SELECT Query - Foundation of SQL",
+                what_it_does: "Retrieves all columns and all rows from the users table",
+                use_cases: [
+                    "Getting a complete overview of user data for analysis",
+                    "Exporting all user information for backup purposes", 
+                    "Initial data exploration when examining a new table",
+                    "Creating reports that need all user details"
+                ],
+                detailed_explanation: "This is the most fundamental SQL query. SELECT * means 'select all columns' - the asterisk (*) is a wildcard that represents every column in the table. FROM users specifies which table to query. This retrieves every single row and column from the users table.",
+                syntax_breakdown: {
+                    "SELECT": "Keyword that starts every query to retrieve data",
+                    "*": "Wildcard that means 'all columns'", 
+                    "FROM": "Keyword that specifies which table to query",
+                    "users": "The name of the table containing the data"
+                },
+                best_practices: "Use SELECT * carefully in production - it can be slow on large tables. Better to specify only the columns you need."
             },
             {
                 id: 2,
                 instruction: "Select specific columns (name, email) from the customers table",
                 scrambled: ["customers", "select", "name", ",", "email", "from"],
                 correct: ["select", "name", ",", "email", "from", "customers"],
-                explanation: "SELECT name, email FROM customers - Gets only specified columns"
+                explanation: "Selective Column Retrieval - Optimized Queries",
+                what_it_does: "Retrieves only the name and email columns from all rows in the customers table",
+                use_cases: [
+                    "Creating mailing lists with just contact information",
+                    "Displaying user profiles with limited information",
+                    "Generating reports that only need specific data fields",
+                    "Improving query performance by fetching only required data"
+                ],
+                detailed_explanation: "Instead of using *, this query specifies exactly which columns to return. This is more efficient because the database only needs to retrieve and transfer the requested columns, not all data.",
+                syntax_breakdown: {
+                    "SELECT": "Starts the data retrieval command",
+                    "name, email": "Specific column names separated by commas",
+                    ",": "Comma separator between column names",
+                    "FROM": "Specifies the source table",
+                    "customers": "The table containing customer data"
+                },
+                best_practices: "Always specify only the columns you need. This improves performance, reduces network traffic, and makes your queries more maintainable."
             },
             {
                 id: 3,
                 instruction: "Add a WHERE clause to find users older than 25",
                 scrambled: ["select", "*", "from", "users", "where", "age", ">", "25"],
                 correct: ["select", "*", "from", "users", "where", "age", ">", "25"],
-                explanation: "WHERE clause filters results based on conditions"
+                explanation: "Conditional Filtering - WHERE Clause",
+                what_it_does: "Retrieves all data for users whose age is greater than 25",
+                use_cases: [
+                    "Finding adult users for age-restricted content",
+                    "Targeting marketing campaigns to specific age groups", 
+                    "Creating demographic reports and analytics",
+                    "Filtering data for compliance with age-related regulations"
+                ],
+                detailed_explanation: "The WHERE clause adds a condition to filter results. Only rows that meet the condition (age > 25) will be returned. This is fundamental for data filtering and is used in almost every real-world query.",
+                syntax_breakdown: {
+                    "SELECT *": "Retrieve all columns",
+                    "FROM users": "From the users table", 
+                    "WHERE": "Keyword that introduces a condition",
+                    "age": "The column to check",
+                    ">": "Greater than operator",
+                    "25": "The value to compare against"
+                },
+                best_practices: "Use WHERE clauses to limit results and improve performance. Index columns that are frequently used in WHERE conditions."
             },
             {
                 id: 4,
                 instruction: "Order users by age in ascending order",
                 scrambled: ["select", "*", "from", "users", "order", "by", "age", "asc"],
                 correct: ["select", "*", "from", "users", "order", "by", "age", "asc"],
-                explanation: "ORDER BY sorts results - ASC for ascending, DESC for descending"
+                explanation: "Data Sorting - ORDER BY Clause",
+                what_it_does: "Retrieves all users sorted by age from youngest to oldest",
+                use_cases: [
+                    "Displaying user lists in chronological order",
+                    "Creating age-based rankings and leaderboards",
+                    "Organizing data for reports and presentations",
+                    "Finding youngest or oldest users in datasets"
+                ],
+                detailed_explanation: "ORDER BY sorts the results based on specified column(s). ASC means ascending order (smallest to largest). You can also use DESC for descending order (largest to smallest).",
+                syntax_breakdown: {
+                    "SELECT * FROM users": "Basic query to get all user data",
+                    "ORDER BY": "Keyword that specifies sorting",
+                    "age": "The column to sort by",
+                    "ASC": "Ascending order (optional - ASC is default)"
+                },
+                best_practices: "ORDER BY should come at the end of your query. For better performance on large tables, consider indexing columns used for sorting."
             },
             {
                 id: 5,
-                instruction: "Select users where name equals 'John' (use single quotes)",
+                instruction: "Select users where name equals 'John'",
                 scrambled: ["select", "*", "from", "users", "where", "name", "=", "'John'"],
                 correct: ["select", "*", "from", "users", "where", "name", "=", "'John'"],
-                explanation: "Use single quotes around text values in SQL conditions"
+                explanation: "Exact Text Matching - String Equality",
+                what_it_does: "Finds all users whose name field exactly matches 'John'",
+                use_cases: [
+                    "Looking up specific users by name",
+                    "Finding all instances of a particular value",
+                    "User authentication and login systems",
+                    "Searching for exact matches in customer databases"
+                ],
+                detailed_explanation: "This query demonstrates exact string matching using the equals operator. Text values must be enclosed in single quotes. The match is typically case-sensitive depending on database settings.",
+                syntax_breakdown: {
+                    "SELECT * FROM users": "Get all data from users table",
+                    "WHERE": "Introduces the filter condition",
+                    "name": "The column to check",
+                    "=": "Equals operator for exact matching",
+                    "'John'": "Text value in single quotes"
+                },
+                best_practices: "Always use single quotes for text values. For case-insensitive searches, use UPPER() or LOWER() functions. Consider using LIKE for partial matches."
             },
             {
                 id: 6,
                 instruction: "Count all records in the products table",
                 scrambled: ["select", "count", "(", "*", ")", "from", "products"],
                 correct: ["select", "count", "(", "*", ")", "from", "products"],
-                explanation: "COUNT(*) returns the total number of rows in a table"
+                explanation: "Aggregate Functions - Counting Rows",
+                what_it_does: "Returns the total number of rows (records) in the products table",
+                use_cases: [
+                    "Getting inventory counts for business reports",
+                    "Monitoring database size and growth",
+                    "Validating data import/export processes",
+                    "Creating dashboard metrics and KPIs"
+                ],
+                detailed_explanation: "COUNT(*) is an aggregate function that returns the number of rows. Unlike SELECT *, this returns just one number - the total count. This is essential for analytics and reporting.",
+                syntax_breakdown: {
+                    "SELECT": "Starts the query",
+                    "COUNT": "Aggregate function to count rows",
+                    "(*)": "Counts all rows including NULLs",
+                    "FROM products": "Specifies the table to count"
+                },
+                best_practices: "COUNT(*) counts all rows. Use COUNT(column_name) to count non-NULL values in a specific column. Other useful aggregate functions include SUM, AVG, MIN, MAX."
             },
             {
                 id: 7,
                 instruction: "Join users and orders tables on user_id",
                 scrambled: ["select", "*", "from", "users", "join", "orders", "on", "users.id", "=", "orders.user_id"],
                 correct: ["select", "*", "from", "users", "join", "orders", "on", "users.id", "=", "orders.user_id"],
-                explanation: "JOIN connects related data from multiple tables"
+                explanation: "Table Relations - INNER JOIN",
+                what_it_does: "Combines data from users and orders tables where there's a matching relationship",
+                use_cases: [
+                    "Getting customer information along with their order history",
+                    "Creating comprehensive reports that need data from multiple tables",
+                    "Analyzing relationships between different entities",
+                    "Building complex business intelligence queries"
+                ],
+                detailed_explanation: "JOIN connects related data from multiple tables. This INNER JOIN returns only rows where there's a match in both tables - users who have placed orders. The ON clause specifies how tables are related.",
+                syntax_breakdown: {
+                    "SELECT * FROM users": "Start with the users table",
+                    "JOIN orders": "Connect to the orders table",
+                    "ON": "Specifies the join condition",
+                    "users.id = orders.user_id": "Matches user IDs between tables"
+                },
+                best_practices: "Use table aliases for cleaner syntax. Consider LEFT JOIN to include users without orders. Index foreign key columns for better JOIN performance."
             },
             {
                 id: 8,
                 instruction: "Group products by category and count them",
                 scrambled: ["select", "category", ",", "count", "(", "*", ")", "from", "products", "group", "by", "category"],
                 correct: ["select", "category", ",", "count", "(", "*", ")", "from", "products", "group", "by", "category"],
-                explanation: "GROUP BY groups rows with same values and allows aggregate functions"
-            },
-            {
-                id: 9,
-                instruction: "Select top 5 users ordered by registration date",
-                scrambled: ["select", "*", "from", "users", "order", "by", "created_at", "desc", "limit", "5"],
-                correct: ["select", "*", "from", "users", "order", "by", "created_at", "desc", "limit", "5"],
-                explanation: "LIMIT restricts the number of results returned"
-            },
-            {
-                id: 10,
-                instruction: "Insert a new user with name 'Alice' and age 30",
-                scrambled: ["insert", "into", "users", "(", "name", ",", "age", ")", "values", "(", "'Alice'", ",", "30", ")"],
-                correct: ["insert", "into", "users", "(", "name", ",", "age", ")", "values", "(", "'Alice'", ",", "30", ")"],
-                explanation: "INSERT INTO adds new records to a table with specified values"
+                explanation: "Data Aggregation - GROUP BY with COUNT",
+                what_it_does: "Groups products by their category and shows how many products exist in each category",
+                use_cases: [
+                    "Creating inventory reports by product category",
+                    "Analyzing sales distribution across different product types",
+                    "Building dashboard summaries and charts",
+                    "Understanding data composition and patterns"
+                ],
+                detailed_explanation: "GROUP BY combines rows with the same values into summary rows. Combined with COUNT(*), this shows how many items exist in each group. This is essential for creating summaries and analytics.",
+                syntax_breakdown: {
+                    "SELECT category": "The column to group by",
+                    ", COUNT(*)": "Count how many rows in each group",
+                    "FROM products": "The source table",
+                    "GROUP BY category": "Group rows by category values"
+                },
+                best_practices: "All non-aggregate columns in SELECT must appear in GROUP BY. Use HAVING to filter groups (like WHERE for GROUP BY). Combine with ORDER BY to sort results."
             }
         ];
 
         // Scoring system
         const scoringSystem = {
             pointsPerQuestion: 10,
-            totalQuestions: 10,
-            perfectScore: 100
+            totalQuestions: 8,
+            perfectScore: 80
         };
 
         // Completion messages
@@ -724,6 +866,7 @@ body {
         let scrambledWords = [];
         let totalScore = 0;
         let questionsCompleted = [];
+        let userAnswers = [];
 
         // DOM elements
         const elements = {
@@ -734,6 +877,7 @@ body {
             submitBtn: document.getElementById('submit-btn'),
             resetBtn: document.getElementById('reset-btn'),
             nextBtn: document.getElementById('next-btn'),
+            endQuizBtn: document.getElementById('end-quiz-btn'),
             modal: document.getElementById('feedback-modal'),
             modalContent: document.getElementById('modal-content'),
             modalTitle: document.getElementById('modal-title'),
@@ -749,6 +893,8 @@ body {
 
         // Initialize game
         function initGame() {
+            // Set dark theme on document
+            document.documentElement.setAttribute('data-color-scheme', 'dark');
             updateStats();
             loadQuestion();
             setupEventListeners();
@@ -759,7 +905,8 @@ body {
             elements.submitBtn.addEventListener('click', submitAnswer);
             elements.resetBtn.addEventListener('click', resetQuestion);
             elements.nextBtn.addEventListener('click', nextQuestion);
-            elements.modalClose.addEventListener('click', closeModal);
+            elements.modalClose.addEventListener('click', handleModalClose);
+            elements.endQuizBtn.addEventListener('click', endQuiz);
 
             // Modal click outside to close
             elements.modal.addEventListener('click', (e) => {
@@ -843,17 +990,22 @@ body {
         function submitAnswer() {
             const isCorrect = arraysEqual(userSolution, currentQuestion.correct);
             
-            if (isCorrect) {
-                // Mark question as completed if not already done
-                if (!questionsCompleted.includes(currentQuestionIndex)) {
-                    questionsCompleted.push(currentQuestionIndex);
-                    totalScore += scoringSystem.pointsPerQuestion;
-                    elements.scoreDisplay.textContent = totalScore;
-                }
-                showFeedback(true, scoringSystem.pointsPerQuestion);
-            } else {
-                showFeedback(false, 0);
+            // Store user answer
+            userAnswers[currentQuestionIndex] = {
+                question: currentQuestion.instruction,
+                userAnswer: [...userSolution],
+                correctAnswer: [...currentQuestion.correct],
+                isCorrect: isCorrect
+            };
+            
+            if (isCorrect && !questionsCompleted.includes(currentQuestionIndex)) {
+                questionsCompleted.push(currentQuestionIndex);
+                totalScore += scoringSystem.pointsPerQuestion;
+                elements.scoreDisplay.textContent = totalScore;
             }
+            
+            // Show neutral feedback without indicating correctness
+            showFeedback();
         }
 
         // Check if arrays are equal
@@ -867,33 +1019,83 @@ body {
 
 
 
-        // Show feedback modal
-        function showFeedback(isCorrect, score) {
-            elements.modalContent.className = `modal-content ${isCorrect ? 'success' : 'error'}`;
+        // Show feedback modal with detailed explanations
+        function showFeedback() {
+            const isCorrect = arraysEqual(userSolution, currentQuestion.correct);
+            const correctAnswer = currentQuestion.correct.join(' ');
+            const userAnswer = userSolution.join(' ');
             
-            if (isCorrect) {
-                elements.modalTitle.textContent = messages.questionCorrect;
-                elements.modalMessage.textContent = 'You can now proceed to the next question!';
-                elements.modalScore.textContent = `+${score} points`;
-                elements.modalScore.style.display = 'block';
-                elements.nextBtn.style.display = 'inline-flex';
-                
-                // Show explanation for correct answers
-                elements.explanationText.textContent = currentQuestion.explanation;
-                elements.modalExplanation.style.display = 'block';
-            } else {
-                elements.modalTitle.textContent = '❌ Incorrect';
-                elements.modalMessage.textContent = messages.encouragement;
-                elements.modalScore.style.display = 'none';
-                elements.modalExplanation.style.display = 'none';
-            }
+            // Set modal styling based on correctness
+            elements.modalContent.className = isCorrect ? 'modal-content success' : 'modal-content error';
+            elements.modalTitle.textContent = isCorrect ? '🎉 Correct!' : '💭 Let\'s Learn';
             
+            // Create detailed explanation HTML
+            let explanationHTML = `
+                <div style="text-align: left; margin: 20px 0;">
+                    <div style="background: #3d3d3d; padding: 15px; border-radius: var(--radius-base); margin-bottom: 15px; border: 1px solid #d0d0d0;">
+                        <strong style="color: #4A90E2; font-size: 16px;">${currentQuestion.explanation}</strong>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">📋 Correct Answer:</strong>
+                        <code style="background: #1B4332; color: #f0f0f0; padding: 8px 12px; border-radius: 4px; font-family: var(--font-family-mono); display: block; border: 1px solid #d0d0d0;">${correctAnswer}</code>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">💡 What This Query Does:</strong>
+                        <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.5;">${currentQuestion.what_it_does}</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">🎯 Real-World Use Cases:</strong>
+                        <ul style="color: var(--color-text-secondary); margin: 0; padding-left: 20px; line-height: 1.5;">
+                            ${currentQuestion.use_cases.map(useCase => `<li style="margin-bottom: 4px;">${useCase}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">🔍 Detailed Explanation:</strong>
+                        <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.5;">${currentQuestion.detailed_explanation}</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">⚙️ Syntax Breakdown:</strong>
+                        <div style="background: #2d2d2d; padding: 12px; border-radius: 4px; border: 1px solid #3d3d3d;">
+                            ${Object.entries(currentQuestion.syntax_breakdown).map(([key, value]) => 
+                                `<div style="margin-bottom: 6px;"><code style="color: #4A90E2; background: none; padding: 0;">${key}</code>: <span style="color: var(--color-text-secondary);">${value}</span></div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">💡 Best Practices:</strong>
+                        <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.5; font-style: italic;">${currentQuestion.best_practices}</p>
+                    </div>
+                </div>
+            `;
+            
+            elements.modalMessage.innerHTML = explanationHTML;
+            elements.modalScore.style.display = 'none';
+            elements.modalExplanation.style.display = 'none';
+            elements.modalClose.textContent = currentQuestionIndex === sqlQuestions.length - 1 ? 'Finish Quiz' : 'Next Question';
             elements.modal.classList.add('show');
         }
 
         // Close modal
         function closeModal() {
             elements.modal.classList.remove('show');
+        }
+
+        // Handle modal close button - advance to next question
+        function handleModalClose() {
+            closeModal();
+            if (currentQuestionIndex >= sqlQuestions.length - 1) {
+                // Last question completed - show final results
+                currentQuestionIndex++;
+                showCompletionMessage();
+            } else {
+                nextQuestion();
+            }
         }
 
         // Reset current question
@@ -919,29 +1121,115 @@ body {
             elements.scoreDisplay.textContent = totalScore;
         }
 
+        // End quiz function
+        function endQuiz() {
+            showFinalResults();
+        }
+
         // Show completion message
         function showCompletionMessage() {
-            elements.modalContent.className = 'modal-content success';
-            elements.modalTitle.textContent = messages.quizComplete;
-            elements.modalMessage.textContent = `You've completed all ${sqlQuestions.length} SQL questions!`;
-            elements.modalScore.textContent = `Final Score: ${totalScore}/${scoringSystem.perfectScore}`;
-            elements.modalScore.style.display = 'block';
-            elements.modalExplanation.style.display = 'none';
-            elements.modal.classList.add('show');
+            showFinalResults();
+        }
+
+        // Show final results with detailed explanations
+        function showFinalResults() {
+            const finalScore = questionsCompleted.length;
+            const totalPossibleScore = finalScore * scoringSystem.pointsPerQuestion;
             
-            // Update modal close button
-            elements.modalClose.textContent = 'Restart Quiz';
-            elements.modalClose.onclick = () => {
-                // Reset game
-                currentQuestionIndex = 0;
-                totalScore = 0;
-                questionsCompleted = [];
-                elements.modalClose.textContent = 'Continue';
-                elements.modalClose.onclick = closeModal;
-                closeModal();
-                updateStats();
-                loadQuestion();
-            };
+            let resultHTML = `<div style="text-align: center;">`;
+            resultHTML += `<h2>🎯 SQL Quiz Complete!</h2>`;
+            resultHTML += `<div class="score-display" style="font-size: 28px; margin: 20px 0;">Final Score: ${totalScore}/${scoringSystem.perfectScore} points</div>`;
+            resultHTML += `<div style="font-size: 18px; margin-bottom: 30px; color: var(--color-text-secondary);">Questions Answered Correctly: ${finalScore}/${sqlQuestions.length}</div>`;
+            resultHTML += `</div>`;
+            
+            resultHTML += `<div style="text-align: left; max-height: 70vh; overflow-y: auto; margin: 20px 0; padding: 20px; background: #2d2d2d; border-radius: var(--radius-lg); border: 1px solid #3d3d3d;">`;
+            resultHTML += `<h3 style="margin-top: 0;">📋 Complete Review with Explanations</h3>`;
+            
+            // Show all questions up to current index or all answered questions
+            const maxQuestions = Math.max(userAnswers.length, currentQuestionIndex, 1);
+            
+            for (let i = 0; i < maxQuestions; i++) {
+                const answer = userAnswers[i];
+                const question = sqlQuestions[i];
+                
+                if (answer || question) {
+                    const isCorrect = answer ? answer.isCorrect : false;
+                    const statusIcon = isCorrect ? '✅' : '❌';
+                    const statusColor = isCorrect ? '#4A90E2' : '#ff6b6b';
+                    const currentQ = question || sqlQuestions[i];
+                    
+                    resultHTML += `<div style="margin-bottom: 30px; padding: 20px; border: 1px solid #d0d0d0; border-radius: var(--radius-lg); background: #1a1a1a;">`;
+                    
+                    // Question header
+                    resultHTML += `<div style="display: flex; align-items: center; margin-bottom: 15px;">`;
+                    resultHTML += `<div style="font-weight: bold; font-size: 16px; color: #f0f0f0;">Question ${i + 1}: <span style="color: ${statusColor}">${statusIcon}</span></div>`;
+                    resultHTML += `</div>`;
+                    
+                    // Question instruction
+                    resultHTML += `<div style="font-size: 14px; margin-bottom: 12px; color: #f0f0f0; font-weight: 500;">${currentQ.instruction}</div>`;
+                    
+                    // User answer vs correct answer
+                    if (answer) {
+                        resultHTML += `<div style="margin-bottom: 10px;"><strong style="color: #b0b0b0;">Your answer:</strong> <code style="background: #3d3d3d; color: #f0f0f0; padding: 4px 8px; border-radius: 3px; font-family: var(--font-family-mono); border: 1px solid #d0d0d0;">${answer.userAnswer.join(' ')}</code></div>`;
+                    } else {
+                        resultHTML += `<div style="margin-bottom: 10px;"><strong style="color: #b0b0b0;">Your answer:</strong> <span style="color: #ff6b6b;">Not answered</span></div>`;
+                    }
+                    
+                    resultHTML += `<div style="margin-bottom: 15px;"><strong style="color: #b0b0b0;">Correct answer:</strong> <code style="background: #1B4332; color: #f0f0f0; padding: 4px 8px; border-radius: 3px; font-family: var(--font-family-mono); border: 1px solid #d0d0d0;">${currentQ.correct.join(' ')}</code></div>`;
+                    
+                    // Detailed explanation section
+                    resultHTML += `<div style="border-top: 1px solid #3d3d3d; padding-top: 15px; margin-top: 15px;">`;
+                    resultHTML += `<div style="background: #2d2d2d; padding: 12px; border-radius: 6px; margin-bottom: 12px; border: 1px solid #3d3d3d;">`;
+                    resultHTML += `<strong style="color: #4A90E2; font-size: 14px;">${currentQ.explanation}</strong>`;
+                    resultHTML += `</div>`;
+                    
+                    resultHTML += `<div style="margin-bottom: 10px;">`;
+                    resultHTML += `<strong style="color: #f0f0f0; font-size: 13px;">💡 What it does:</strong>`;
+                    resultHTML += `<p style="color: #b0b0b0; margin: 4px 0 0 0; font-size: 12px; line-height: 1.4;">${currentQ.what_it_does}</p>`;
+                    resultHTML += `</div>`;
+                    
+                    resultHTML += `<div style="margin-bottom: 10px;">`;
+                    resultHTML += `<strong style="color: #f0f0f0; font-size: 13px;">🎯 Use cases:</strong>`;
+                    resultHTML += `<ul style="color: #b0b0b0; margin: 4px 0 0 0; padding-left: 16px; font-size: 12px; line-height: 1.3;">`;
+                    currentQ.use_cases.slice(0, 2).forEach(useCase => {
+                        resultHTML += `<li style="margin-bottom: 2px;">${useCase}</li>`;
+                    });
+                    resultHTML += `</ul></div>`;
+                    
+                    resultHTML += `<div style="margin-bottom: 10px;">`;
+                    resultHTML += `<strong style="color: #f0f0f0; font-size: 13px;">📝 Key insight:</strong>`;
+                    resultHTML += `<p style="color: #b0b0b0; margin: 4px 0 0 0; font-size: 12px; line-height: 1.4; font-style: italic;">${currentQ.best_practices}</p>`;
+                    resultHTML += `</div>`;
+                    
+                    resultHTML += `</div>`; // Close explanation section
+                    resultHTML += `</div>`; // Close question container
+                }
+            }
+            
+            resultHTML += `</div>`;
+            resultHTML += `<div style="text-align: center; margin-top: 30px;">`;
+            resultHTML += `<button class="btn btn-primary" onclick="restartQuiz()" style="padding: 12px 24px; font-size: 16px; margin-right: 12px;">🔄 Restart Quiz</button>`;
+            resultHTML += `<button class="btn btn-secondary" onclick="toggleDetailedView()" style="padding: 12px 24px; font-size: 16px;">📚 Toggle Full Details</button>`;
+            resultHTML += `</div>`;
+            
+            document.querySelector('.challenge-container').innerHTML = resultHTML;
+        }
+
+        // Restart quiz function
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            totalScore = 0;
+            questionsCompleted = [];
+            userAnswers = [];
+            location.reload();
+        }
+        
+        // Toggle detailed view function for final results
+        function toggleDetailedView() {
+            const explanationSections = document.querySelectorAll('[style*="border-top: 1px solid #3d3d3d"]');
+            explanationSections.forEach(section => {
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+            });
         }
 
         // Start the game
