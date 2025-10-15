@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Puzzle Challenge</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
+  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
+  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
+  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
+  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
+  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
+  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
+  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Custom styles for the Code Puzzle Challenge */
+.app-container {
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+.header {
+  background: var(--color-bg-5);
+  padding: var(--space-24) var(--space-16);
+  text-align: center;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.header h1 {
+  color: var(--color-text);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.header p {
+  color: var(--color-text-secondary);
+  margin: var(--space-8) 0 0;
+  font-size: var(--font-size-lg);
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-surface);
+  padding: var(--space-16);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  margin: var(--space-24) var(--space-16);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  display: block;
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.difficulty-selector {
+  display: flex;
+  gap: var(--space-8);
+  margin: var(--space-16);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.difficulty-btn {
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid var(--color-border);
+  background: var(--color-secondary);
+  color: var(--color-text);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.difficulty-btn:hover {
+  background: var(--color-secondary-hover);
+}
+
+.difficulty-btn.active {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-color: var(--color-primary);
+}
+
+.challenge-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-16);
+}
+
+.challenge-question {
+  background: var(--color-bg-1);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-24);
+  border: 1px solid var(--color-card-border);
+}
+
+.challenge-question h3 {
+  color: var(--color-text);
+  margin: 0 0 var(--space-8) 0;
+  font-size: var(--font-size-xl);
+}
+
+.challenge-question p {
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.word-areas {
+  display: grid;
+  gap: var(--space-24);
+  margin-bottom: var(--space-24);
+}
+
+.word-area {
+  background: var(--color-surface);
+  border: 2px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  min-height: 120px;
+}
+
+.word-area h4 {
+  margin: 0 0 var(--space-16) 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+}
+
+.scrambled-area {
+  border-color: var(--color-warning);
+  background: var(--color-bg-6);
+}
+
+.solution-area {
+  border-color: var(--color-success);
+  background: var(--color-bg-3);
+}
+
+.words-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  min-height: 60px;
+}
+
+.word-block {
+  padding: var(--space-8) var(--space-12);
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--duration-fast) var(--ease-standard);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.word-block:hover {
+  background: var(--color-secondary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.word-block:active {
+  transform: translateY(0);
+}
+
+.word-block.in-solution {
+  background: var(--color-bg-3);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-12);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: var(--space-10) var(--space-20);
+  border: none;
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--color-surface);
+  padding: var(--space-32);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-card-border);
+}
+
+.modal-content h3 {
+  margin: 0 0 var(--space-16) 0;
+  font-size: var(--font-size-2xl);
+}
+
+.modal-content.success h3 {
+  color: var(--color-success);
+}
+
+.modal-content.error h3 {
+  color: var(--color-error);
+}
+
+.modal-content p {
+  margin: 0 0 var(--space-20) 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.score-display {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: var(--space-16) 0;
+}
+
+.explanation {
+  background: var(--color-bg-2);
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-card-border);
+}
+
+.explanation strong {
+  color: var(--color-text);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header {
+    padding: var(--space-16);
+  }
+  
+  .header h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .game-stats {
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+  
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+  }
+  
+  .challenge-container {
+    padding: var(--space-8);
+  }
+  
+  .word-areas {
+    gap: var(--space-16);
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .modal-content {
+    padding: var(--space-20);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>SQL Puzzle Challenge</h1>
+            <p>Rearrange scrambled SQL keywords to master database queries</p>
+        </header>
+
+        <!-- Game Stats -->
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="stat-value" id="current-question">1</span>
+                <span class="stat-label">Question</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="total-questions">10</span>
+                <span class="stat-label">Total</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Score</span>
+            </div>
+        </div>
+
+
+
+        <!-- Challenge Container -->
+        <div class="challenge-container">
+            <!-- Current Challenge Question -->
+            <div class="challenge-question">
+                <h3 id="question-title">Loading...</h3>
+                <p id="question-description">Please wait while we load your challenge.</p>
+            </div>
+
+            <!-- Word Areas -->
+            <div class="word-areas">
+                <!-- Scrambled Words Area -->
+                <div class="word-area scrambled-area">
+                    <h4>Scrambled Words (Click to Move)</h4>
+                    <div class="words-container" id="scrambled-words"></div>
+                </div>
+
+                <!-- Solution Area -->
+                <div class="word-area solution-area">
+                    <h4>Your Solution (Click to Remove)</h4>
+                    <div class="words-container" id="solution-words"></div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="btn btn-secondary" id="reset-btn">Reset</button>
+                <button class="btn btn-primary" id="submit-btn" disabled>Submit Answer</button>
+                <button class="btn btn-primary" id="next-btn" style="display: none;">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Modal for Feedback -->
+        <div class="modal" id="feedback-modal">
+            <div class="modal-content" id="modal-content">
+                <h3 id="modal-title">Result</h3>
+                <p id="modal-message">Your feedback message will appear here.</p>
+                <div class="score-display" id="modal-score"></div>
+                <div class="explanation" id="modal-explanation" style="display: none;">
+                    <strong>Explanation:</strong>
+                    <p id="explanation-text"></p>
+                </div>
+                <button class="btn btn-primary" id="modal-close">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SQL Questions Data
+        const sqlQuestions = [
+            {
+                id: 1,
+                instruction: "Create a basic SELECT query to get all columns from the users table",
+                scrambled: ["*", "users", "select", "from"],
+                correct: ["select", "*", "from", "users"],
+                explanation: "SELECT * FROM users - Gets all columns from the users table"
+            },
+            {
+                id: 2,
+                instruction: "Select specific columns (name, email) from the customers table",
+                scrambled: ["customers", "select", "name", ",", "email", "from"],
+                correct: ["select", "name", ",", "email", "from", "customers"],
+                explanation: "SELECT name, email FROM customers - Gets only specified columns"
+            },
+            {
+                id: 3,
+                instruction: "Add a WHERE clause to find users older than 25",
+                scrambled: ["select", "*", "from", "users", "where", "age", ">", "25"],
+                correct: ["select", "*", "from", "users", "where", "age", ">", "25"],
+                explanation: "WHERE clause filters results based on conditions"
+            },
+            {
+                id: 4,
+                instruction: "Order users by age in ascending order",
+                scrambled: ["select", "*", "from", "users", "order", "by", "age", "asc"],
+                correct: ["select", "*", "from", "users", "order", "by", "age", "asc"],
+                explanation: "ORDER BY sorts results - ASC for ascending, DESC for descending"
+            },
+            {
+                id: 5,
+                instruction: "Select users where name equals 'John' (use single quotes)",
+                scrambled: ["select", "*", "from", "users", "where", "name", "=", "'John'"],
+                correct: ["select", "*", "from", "users", "where", "name", "=", "'John'"],
+                explanation: "Use single quotes around text values in SQL conditions"
+            },
+            {
+                id: 6,
+                instruction: "Count all records in the products table",
+                scrambled: ["select", "count", "(", "*", ")", "from", "products"],
+                correct: ["select", "count", "(", "*", ")", "from", "products"],
+                explanation: "COUNT(*) returns the total number of rows in a table"
+            },
+            {
+                id: 7,
+                instruction: "Join users and orders tables on user_id",
+                scrambled: ["select", "*", "from", "users", "join", "orders", "on", "users.id", "=", "orders.user_id"],
+                correct: ["select", "*", "from", "users", "join", "orders", "on", "users.id", "=", "orders.user_id"],
+                explanation: "JOIN connects related data from multiple tables"
+            },
+            {
+                id: 8,
+                instruction: "Group products by category and count them",
+                scrambled: ["select", "category", ",", "count", "(", "*", ")", "from", "products", "group", "by", "category"],
+                correct: ["select", "category", ",", "count", "(", "*", ")", "from", "products", "group", "by", "category"],
+                explanation: "GROUP BY groups rows with same values and allows aggregate functions"
+            },
+            {
+                id: 9,
+                instruction: "Select top 5 users ordered by registration date",
+                scrambled: ["select", "*", "from", "users", "order", "by", "created_at", "desc", "limit", "5"],
+                correct: ["select", "*", "from", "users", "order", "by", "created_at", "desc", "limit", "5"],
+                explanation: "LIMIT restricts the number of results returned"
+            },
+            {
+                id: 10,
+                instruction: "Insert a new user with name 'Alice' and age 30",
+                scrambled: ["insert", "into", "users", "(", "name", ",", "age", ")", "values", "(", "'Alice'", ",", "30", ")"],
+                correct: ["insert", "into", "users", "(", "name", ",", "age", ")", "values", "(", "'Alice'", ",", "30", ")"],
+                explanation: "INSERT INTO adds new records to a table with specified values"
+            }
+        ];
+
+        // Scoring system
+        const scoringSystem = {
+            pointsPerQuestion: 10,
+            totalQuestions: 10,
+            perfectScore: 100
+        };
+
+        // Completion messages
+        const messages = {
+            questionCorrect: "🎉 Excellent! Your SQL query is correct!",
+            quizComplete: "🏆 Congratulations! You've mastered these SQL basics!",
+            encouragement: "Don't worry, try again! SQL takes practice to master."
+        };
+
+        // Game state
+        let currentQuestionIndex = 0;
+        let currentQuestion = null;
+        let userSolution = [];
+        let scrambledWords = [];
+        let totalScore = 0;
+        let questionsCompleted = [];
+
+        // DOM elements
+        const elements = {
+            questionTitle: document.getElementById('question-title'),
+            questionDescription: document.getElementById('question-description'),
+            scrambledContainer: document.getElementById('scrambled-words'),
+            solutionContainer: document.getElementById('solution-words'),
+            submitBtn: document.getElementById('submit-btn'),
+            resetBtn: document.getElementById('reset-btn'),
+            nextBtn: document.getElementById('next-btn'),
+            modal: document.getElementById('feedback-modal'),
+            modalContent: document.getElementById('modal-content'),
+            modalTitle: document.getElementById('modal-title'),
+            modalMessage: document.getElementById('modal-message'),
+            modalScore: document.getElementById('modal-score'),
+            modalExplanation: document.getElementById('modal-explanation'),
+            explanationText: document.getElementById('explanation-text'),
+            modalClose: document.getElementById('modal-close'),
+            scoreDisplay: document.getElementById('score'),
+            currentQuestionDisplay: document.getElementById('current-question'),
+            totalQuestionsDisplay: document.getElementById('total-questions')
+        };
+
+        // Initialize game
+        function initGame() {
+            updateStats();
+            loadQuestion();
+            setupEventListeners();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            elements.submitBtn.addEventListener('click', submitAnswer);
+            elements.resetBtn.addEventListener('click', resetQuestion);
+            elements.nextBtn.addEventListener('click', nextQuestion);
+            elements.modalClose.addEventListener('click', closeModal);
+
+            // Modal click outside to close
+            elements.modal.addEventListener('click', (e) => {
+                if (e.target === elements.modal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // Load current question
+        function loadQuestion() {
+            if (currentQuestionIndex >= sqlQuestions.length) {
+                // All questions completed
+                showCompletionMessage();
+                return;
+            }
+
+            currentQuestion = sqlQuestions[currentQuestionIndex];
+            scrambledWords = [...currentQuestion.scrambled];
+            userSolution = [];
+            
+            // Update UI
+            elements.questionTitle.textContent = currentQuestion.instruction;
+            elements.questionDescription.textContent = `Question ${currentQuestionIndex + 1} of ${sqlQuestions.length}`;
+            
+            renderWords();
+            updateSubmitButton();
+            elements.nextBtn.style.display = 'none';
+        }
+
+        // Render word blocks
+        function renderWords() {
+            // Clear containers
+            elements.scrambledContainer.innerHTML = '';
+            elements.solutionContainer.innerHTML = '';
+
+            // Render scrambled words
+            scrambledWords.forEach((word, index) => {
+                const wordElement = createWordElement(word, 'scrambled', index);
+                elements.scrambledContainer.appendChild(wordElement);
+            });
+
+            // Render solution words
+            userSolution.forEach((word, index) => {
+                const wordElement = createWordElement(word, 'solution', index);
+                elements.solutionContainer.appendChild(wordElement);
+            });
+        }
+
+        // Create word element
+        function createWordElement(word, type, index) {
+            const element = document.createElement('div');
+            element.className = `word-block ${type === 'solution' ? 'in-solution' : ''}`;
+            element.textContent = word;
+            element.addEventListener('click', () => moveWord(word, type, index));
+            return element;
+        }
+
+        // Move word between areas
+        function moveWord(word, fromType, index) {
+            if (fromType === 'scrambled') {
+                // Move from scrambled to solution
+                scrambledWords.splice(index, 1);
+                userSolution.push(word);
+            } else {
+                // Move from solution to scrambled
+                userSolution.splice(index, 1);
+                scrambledWords.push(word);
+            }
+            
+            renderWords();
+            updateSubmitButton();
+        }
+
+        // Update submit button state
+        function updateSubmitButton() {
+            elements.submitBtn.disabled = userSolution.length === 0;
+        }
+
+        // Submit answer
+        function submitAnswer() {
+            const isCorrect = arraysEqual(userSolution, currentQuestion.correct);
+            
+            if (isCorrect) {
+                // Mark question as completed if not already done
+                if (!questionsCompleted.includes(currentQuestionIndex)) {
+                    questionsCompleted.push(currentQuestionIndex);
+                    totalScore += scoringSystem.pointsPerQuestion;
+                    elements.scoreDisplay.textContent = totalScore;
+                }
+                showFeedback(true, scoringSystem.pointsPerQuestion);
+            } else {
+                showFeedback(false, 0);
+            }
+        }
+
+        // Check if arrays are equal
+        function arraysEqual(a, b) {
+            if (a.length !== b.length) return false;
+            for (let i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) return false;
+            }
+            return true;
+        }
+
+
+
+        // Show feedback modal
+        function showFeedback(isCorrect, score) {
+            elements.modalContent.className = `modal-content ${isCorrect ? 'success' : 'error'}`;
+            
+            if (isCorrect) {
+                elements.modalTitle.textContent = messages.questionCorrect;
+                elements.modalMessage.textContent = 'You can now proceed to the next question!';
+                elements.modalScore.textContent = `+${score} points`;
+                elements.modalScore.style.display = 'block';
+                elements.nextBtn.style.display = 'inline-flex';
+                
+                // Show explanation for correct answers
+                elements.explanationText.textContent = currentQuestion.explanation;
+                elements.modalExplanation.style.display = 'block';
+            } else {
+                elements.modalTitle.textContent = '❌ Incorrect';
+                elements.modalMessage.textContent = messages.encouragement;
+                elements.modalScore.style.display = 'none';
+                elements.modalExplanation.style.display = 'none';
+            }
+            
+            elements.modal.classList.add('show');
+        }
+
+        // Close modal
+        function closeModal() {
+            elements.modal.classList.remove('show');
+        }
+
+        // Reset current question
+        function resetQuestion() {
+            scrambledWords = [...currentQuestion.scrambled];
+            userSolution = [];
+            renderWords();
+            updateSubmitButton();
+        }
+
+        // Next question
+        function nextQuestion() {
+            currentQuestionIndex++;
+            updateStats();
+            loadQuestion();
+            closeModal();
+        }
+
+        // Update stats display
+        function updateStats() {
+            elements.currentQuestionDisplay.textContent = currentQuestionIndex + 1;
+            elements.totalQuestionsDisplay.textContent = sqlQuestions.length;
+            elements.scoreDisplay.textContent = totalScore;
+        }
+
+        // Show completion message
+        function showCompletionMessage() {
+            elements.modalContent.className = 'modal-content success';
+            elements.modalTitle.textContent = messages.quizComplete;
+            elements.modalMessage.textContent = `You've completed all ${sqlQuestions.length} SQL questions!`;
+            elements.modalScore.textContent = `Final Score: ${totalScore}/${scoringSystem.perfectScore}`;
+            elements.modalScore.style.display = 'block';
+            elements.modalExplanation.style.display = 'none';
+            elements.modal.classList.add('show');
+            
+            // Update modal close button
+            elements.modalClose.textContent = 'Restart Quiz';
+            elements.modalClose.onclick = () => {
+                // Reset game
+                currentQuestionIndex = 0;
+                totalScore = 0;
+                questionsCompleted = [];
+                elements.modalClose.textContent = 'Continue';
+                elements.modalClose.onclick = closeModal;
+                closeModal();
+                updateStats();
+                loadQuestion();
+            };
+        }
+
+        // Start the game
+        initGame();
+    </script>
+</body>
+</html>
