@@ -40,15 +40,26 @@
             background: #e2e8f0 !important;
         }
         .sortable-chosen {
-            transform: rotate(5deg);
+            transform: rotate(2deg);
+            z-index: 1000;
         }
         .quiz-card {
             transition: all 0.3s ease;
             cursor: grab;
+            min-height: 44px;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
         }
         .quiz-card:active {
             cursor: grabbing;
+            transform: scale(1.05);
         }
+        
         /* CRITICAL FIX: Ensure Build Query elements never get disabled styling */
         #drop-zone .quiz-card {
             opacity: 1 !important;
@@ -69,12 +80,259 @@
         .progress-bar {
             transition: width 1s ease-out;
         }
+        
+        /* MOBILE RESPONSIVE STYLES */
+        
+        /* Touch-friendly buttons and interactions */
+        @media (max-width: 768px) {
+            /* Larger touch targets for mobile */
+            .quiz-card {
+                padding: 12px 16px !important;
+                margin: 6px !important;
+                font-size: 16px !important;
+                min-height: 50px;
+                min-width: 90px;
+                border-radius: 12px;
+                font-weight: 700;
+            }
+            
+            /* Larger buttons */
+            button {
+                min-height: 48px !important;
+                padding: 12px 24px !important;
+                font-size: 16px !important;
+            }
+            
+            /* Stack quiz layout vertically */
+            .quiz-container {
+                flex-direction: column;
+                gap: 24px;
+            }
+            
+            /* Responsive drop zone */
+            #drop-zone {
+                min-height: 80px !important;
+                padding: 16px !important;
+            }
+            
+            #drop-zone .flex {
+                min-height: 60px;
+                gap: 8px;
+            }
+            
+            /* Available parts container */
+            #quiz-parts {
+                justify-content: center !important;
+                gap: 12px !important;
+                padding: 16px;
+            }
+            
+            /* Larger text and spacing */
+            h1 { font-size: 3rem !important; }
+            h2 { font-size: 2.5rem !important; }
+            h3 { font-size: 2rem !important; }
+            h4 { font-size: 1.5rem !important; }
+            
+            p, .text-lg { font-size: 18px !important; line-height: 1.6; }
+            .text-xl { font-size: 22px !important; }
+            
+            /* Lesson cards */
+            .lesson-card {
+                padding: 24px !important;
+                margin-bottom: 16px;
+            }
+            
+            /* Syntax breakdown cards */
+            .syntax-item {
+                padding: 16px !important;
+                margin-bottom: 12px;
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 12px;
+            }
+            
+            .syntax-item .bg-blue-500,
+            .syntax-item .bg-green-500,
+            .syntax-item .bg-purple-500,
+            .syntax-item .bg-orange-500,
+            .syntax-item .bg-red-500,
+            .syntax-item .bg-yellow-500,
+            .syntax-item .bg-pink-500,
+            .syntax-item .bg-indigo-500 {
+                padding: 12px 16px !important;
+                font-size: 16px !important;
+                margin-bottom: 8px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            /* Navigation improvements */
+            .nav-button {
+                padding: 16px 24px !important;
+                margin: 8px !important;
+            }
+            
+            /* Table responsiveness */
+            .data-table {
+                font-size: 14px;
+                overflow-x: auto;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 12px 8px !important;
+                min-width: 80px;
+            }
+            
+            /* XP and progress */
+            .xp-container {
+                padding: 20px !important;
+            }
+            
+            .progress-container {
+                width: 200px !important;
+                height: 6px !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            /* Extra small screens */
+            .container {
+                padding: 12px !important;
+            }
+            
+            .quiz-card {
+                padding: 14px 18px !important;
+                margin: 8px !important;
+                font-size: 15px !important;
+                min-height: 52px;
+                width: calc(100% - 16px);
+                max-width: 280px;
+            }
+            
+            /* Stack lesson grid to single column */
+            #lessons-container {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+            
+            /* Full width drop zone */
+            #drop-zone {
+                width: 100%;
+                margin: 0;
+            }
+            
+            /* Adjust homepage */
+            .homepage-content {
+                padding: 20px;
+            }
+            
+            h1 { font-size: 2.5rem !important; }
+            .text-8xl { font-size: 4rem !important; }
+        }
+        
+        /* Mobile device specific styles */
+        .mobile-device {
+            font-size: 16px; /* Prevent zoom on input focus */
+        }
+        
+        .touch-device {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Use viewport height units with fallback */
+        .min-h-screen {
+            min-height: 100vh;
+            min-height: calc(var(--vh, 1vh) * 100);
+        }
+        
+        /* Touch feedback */
+        @media (hover: none) and (pointer: coarse) {
+            .quiz-card:active {
+                background-color: rgba(255, 255, 255, 0.2) !important;
+                transform: scale(0.95);
+            }
+            
+            button:active {
+                transform: scale(0.95);
+            }
+            
+            .lesson-card:active {
+                transform: scale(0.95);
+            }
+            
+            /* Disable hover effects on touch devices */
+            .hover\:scale-105:hover {
+                transform: none;
+            }
+            
+            .hover\:bg-yellow-500:hover,
+            .hover\:bg-blue-600:hover,
+            .hover\:bg-green-600:hover {
+                background-color: inherit;
+            }
+        }
+        
+        /* Enhanced mobile interactions */
+        @media (max-width: 768px) {
+            /* Larger hit areas for better touch */
+            button, .btn {
+                padding: 14px 20px !important;
+                margin: 8px 4px !important;
+            }
+            
+            /* Better spacing for thumbs */
+            .quiz-card {
+                margin: 8px !important;
+            }
+            
+            /* Prevent horizontal scroll */
+            body {
+                overflow-x: hidden;
+            }
+            
+            /* Better contrast on mobile */
+            .text-gray-600 {
+                color: #4b5563 !important;
+            }
+            
+            .text-gray-500 {
+                color: #6b7280 !important;
+            }
+        }
+        
+        /* Improved sortable ghost for mobile */
+        .sortable-ghost {
+            opacity: 0.3 !important;
+            background: rgba(59, 130, 246, 0.2) !important;
+            border: 2px dashed #3b82f6 !important;
+            transform: scale(1.1);
+        }
+        
+        /* Better visual feedback for dragging */
+        .sortable-chosen {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transform: rotate(3deg) scale(1.05);
+        }
+        
+        /* Prevent text selection during drag */
+        .quiz-card * {
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 min-h-screen">
     <!-- Homepage -->
     <div id="homepage" class="min-h-screen flex items-center justify-center p-4">
-        <div class="text-center bounce-in">
+        <div class="homepage-content text-center bounce-in">
             <div class="mb-8">
                 <div class="text-8xl mb-4">🗃️</div>
                 <h1 class="text-6xl font-bold text-white mb-4 drop-shadow-lg">SQL Quest</h1>
@@ -106,7 +364,7 @@
                 </div>
             </div>
             
-            <div id="lessons-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div id="lessons-container" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <!-- Lessons will be populated by JavaScript -->
             </div>
         </div>
@@ -116,7 +374,7 @@
     <div id="lesson-content" class="hidden min-h-screen p-4 bg-gradient-to-br from-green-400 via-blue-500 to-purple-600">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-8">
-                <button onclick="showLessons()" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg mb-4 transition-all duration-300">
+                <button onclick="showLessons()" class="nav-button bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg mb-4 transition-all duration-300">
                     ← Back to Lessons
                 </button>
             </div>
@@ -143,7 +401,7 @@
                 <!-- Sample Data Table -->
                 <div id="sample-data" class="bg-yellow-50 rounded-2xl p-6 mb-6">
                     <h4 class="text-xl font-semibold text-yellow-800 mb-3">Sample Data 📊</h4>
-                    <div id="data-table" class="overflow-x-auto"></div>
+                    <div id="data-table" class="data-table overflow-x-auto"></div>
                 </div>
                 
                 <!-- Syntax Breakdown -->
@@ -167,19 +425,21 @@
                     <p class="text-lg text-gray-600">Drag the parts below to build the correct SQL query</p>
                 </div>
                 
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Build this query:</h4>
-                    <div class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-16" id="drop-zone">
-                        <div class="flex flex-wrap gap-2 justify-center items-center min-h-12">
-                            <p class="text-gray-500 text-center w-full" id="drop-hint">Drag query parts here (arrange horizontally)</p>
+                <div class="quiz-container mb-8 flex flex-col lg:flex-row gap-8">
+                    <div class="flex-1">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4">Build this query:</h4>
+                        <div class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-16" id="drop-zone">
+                            <div class="flex flex-wrap gap-2 justify-center items-center min-h-12">
+                                <p class="text-gray-500 text-center w-full" id="drop-hint">Drag query parts here (arrange horizontally)</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Available Parts:</h4>
-                    <div id="quiz-parts" class="flex flex-wrap gap-4 justify-center">
-                        <!-- Quiz parts will be populated by JavaScript -->
+                    
+                    <div class="flex-1">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4">Available Parts:</h4>
+                        <div id="quiz-parts" class="flex flex-wrap gap-4 justify-center">
+                            <!-- Quiz parts will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
                 
@@ -383,7 +643,7 @@
                 const isCompleted = userProgress.completed.includes(lesson.id);
                 
                 const lessonCard = document.createElement('div');
-                lessonCard.className = `bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105 slide-in ${
+                lessonCard.className = `lesson-card bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105 slide-in ${
                     isUnlocked ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'
                 }`;
                 
@@ -405,6 +665,15 @@
                 
                 if (isUnlocked) {
                     lessonCard.addEventListener('click', () => showLesson(lesson.id));
+                    
+                    // Add touch feedback for mobile
+                    lessonCard.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    });
+                    
+                    lessonCard.addEventListener('touchend', function() {
+                        this.style.transform = 'scale(1)';
+                    });
                 }
                 
                 container.appendChild(lessonCard);
@@ -475,7 +744,7 @@
             
             currentLesson.syntax_breakdown.forEach(item => {
                 const breakdownItem = document.createElement('div');
-                breakdownItem.className = 'flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm';
+                breakdownItem.className = 'syntax-item flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm';
                 
                 breakdownItem.innerHTML = `
                     <div class="${item.color} text-white px-3 py-2 rounded-lg font-mono font-bold text-sm">
@@ -539,11 +808,31 @@
                 sort: false,
                 filter: '.disabled', // Prevent dragging disabled elements
                 preventOnFilter: false,
+                // Mobile-specific touch settings
+                delay: 150, // Delay before drag starts (helps with scrolling on mobile)
+                delayOnTouchOnly: true, // Only apply delay on touch devices
+                touchStartThreshold: 5, // px, how many pixels the point should move before cancelling a delayed drag event
+                forceFallback: false, // Always use native HTML5 drag and drop
+                fallbackOnBody: true, // Appends the cloned DOM Element into the Document's Body
+                dragoverBubble: true, // Apply bubble for dragover event
+                animation: 200, // Animation speed in ms
+                easing: "cubic-bezier(1, 0, 0, 1)", // Easing for animation
                 onStart: function(evt) {
                     // Double-check: prevent dragging if already used
                     if (usedParts.has(evt.item.dataset.text)) {
                         return false;
                     }
+                    // Add haptic-style feedback
+                    evt.item.style.transform = 'scale(1.05) rotate(2deg)';
+                    
+                    // Vibrate on mobile if supported
+                    if (navigator.vibrate) {
+                        navigator.vibrate(50);
+                    }
+                },
+                onEnd: function(evt) {
+                    // Reset transform
+                    evt.item.style.transform = '';
                 },
                 onClone: function(evt) {
                     // Prevent cloning if part is already used (prevent duplicates)
@@ -557,6 +846,11 @@
                     evt.clone.title = '';
                     // Visual feedback for cloned item
                     evt.clone.classList.add('opacity-75');
+                    
+                    // Haptic feedback for successful clone
+                    if (navigator.vibrate) {
+                        navigator.vibrate([50, 30, 50]);
+                    }
                 }
             });
             
@@ -565,9 +859,25 @@
             Sortable.create(dropZoneElement, {
                 group: 'quiz',
                 direction: 'horizontal',
-                animation: 200, // Smooth reordering animation
+                animation: 250, // Smooth reordering animation
                 ghostClass: 'sortable-ghost',
                 chosenClass: 'sortable-chosen',
+                // Mobile-optimized settings
+                delay: 100,
+                delayOnTouchOnly: true,
+                touchStartThreshold: 10,
+                forceFallback: false,
+                fallbackOnBody: true,
+                dragoverBubble: true,
+                swapThreshold: 0.8, // Threshold for swap
+                invertSwap: true, // Will always use inverted swap zone
+                easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                onStart: function(evt) {
+                    // Haptic feedback when starting drag in build area
+                    if (navigator.vibrate) {
+                        navigator.vibrate(30);
+                    }
+                },
                 onAdd: function(evt) {
                     // Hide the hint text
                     const hint = document.getElementById('drop-hint');
@@ -602,6 +912,11 @@
                         originalPart.title = 'This part is already used in your query';
                     }
                     
+                    // Success haptic feedback
+                    if (navigator.vibrate) {
+                        navigator.vibrate([70, 30, 70]);
+                    }
+                    
                     // Enable check button
                     document.getElementById('check-btn').disabled = droppedParts.length === 0;
                 },
@@ -616,6 +931,11 @@
                         originalPart.classList.remove('disabled', 'opacity-30', 'cursor-not-allowed');
                         originalPart.style.pointerEvents = 'auto';
                         originalPart.title = '';
+                    }
+                    
+                    // Light haptic feedback for removal
+                    if (navigator.vibrate) {
+                        navigator.vibrate(40);
                     }
                     
                     // Show hint if no parts left
@@ -638,6 +958,11 @@
                         }
                     });
                     droppedParts = newOrder;
+                    
+                    // Subtle haptic feedback for reordering
+                    if (navigator.vibrate) {
+                        navigator.vibrate(25);
+                    }
                     
                     // Debug log for reordering
                     console.log('🔄 Parts reordered:', droppedParts.map(p => p.text));
@@ -789,8 +1114,113 @@
         `;
         document.head.appendChild(style);
         
+        // Mobile detection and optimization
+        function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        }
+        
+        function isTabletDevice() {
+            return /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent);
+        }
+        
+        function isTouchDevice() {
+            return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+        }
+        
+        // Add mobile-specific classes to body
+        function addMobileClasses() {
+            const body = document.body;
+            
+            if (isMobileDevice()) {
+                body.classList.add('mobile-device');
+            }
+            
+            if (isTabletDevice()) {
+                body.classList.add('tablet-device');
+            }
+            
+            if (isTouchDevice()) {
+                body.classList.add('touch-device');
+            }
+            
+            // Add viewport height fix for mobile browsers
+            function setViewportHeight() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            setViewportHeight();
+            window.addEventListener('resize', setViewportHeight);
+            window.addEventListener('orientationchange', function() {
+                setTimeout(setViewportHeight, 100);
+            });
+        }
+        
+        // Enhanced touch feedback
+        function addTouchFeedback() {
+            // Add touch feedback to all interactive elements
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.matches('button, .btn, .quiz-card, .lesson-card, [onclick]')) {
+                    e.target.style.transform = 'scale(0.95)';
+                    e.target.style.transition = 'transform 0.1s ease';
+                }
+            }, { passive: true });
+            
+            document.addEventListener('touchend', function(e) {
+                if (e.target.matches('button, .btn, .quiz-card, .lesson-card, [onclick]')) {
+                    setTimeout(() => {
+                        e.target.style.transform = '';
+                    }, 100);
+                }
+            }, { passive: true });
+            
+            document.addEventListener('touchcancel', function(e) {
+                if (e.target.matches('button, .btn, .quiz-card, .lesson-card, [onclick]')) {
+                    e.target.style.transform = '';
+                }
+            }, { passive: true });
+        }
+        
+        // Prevent zoom on double tap for better touch experience
+        function preventDoubleZoom() {
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, { passive: false });
+        }
+        
+        // Add scroll enhancement for mobile
+        function enhanceScrolling() {
+            // Smooth scrolling for mobile
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Prevent rubber band scrolling on iOS
+            document.body.addEventListener('touchmove', function(e) {
+                if (e.target === document.body) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        }
+        
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
+            addMobileClasses();
+            
+            if (isTouchDevice()) {
+                addTouchFeedback();
+                preventDoubleZoom();
+                enhanceScrolling();
+                
+                // Add additional mobile-specific optimizations
+                document.body.style.webkitTapHighlightColor = 'transparent';
+                document.body.style.webkitTouchCallout = 'none';
+                document.body.style.webkitUserSelect = 'none';
+            }
+            
             showHomepage();
         });
     </script>
