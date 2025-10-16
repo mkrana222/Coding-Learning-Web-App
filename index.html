@@ -3,1237 +3,796 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Puzzle Challenge</title>
+    <title>SQL Quest - Learn SQL Like a Game!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-  /* Primitive Color Tokens */
-  --color-white: rgba(255, 255, 255, 1);
-  --color-black: rgba(0, 0, 0, 1);
-  --color-cream-50: rgba(252, 252, 249, 1);
-  --color-cream-100: rgba(255, 255, 253, 1);
-  --color-gray-200: rgba(245, 245, 245, 1);
-  --color-gray-300: rgba(167, 169, 169, 1);
-  --color-gray-400: rgba(119, 124, 124, 1);
-  --color-slate-500: rgba(98, 108, 113, 1);
-  --color-brown-600: rgba(94, 82, 64, 1);
-  --color-charcoal-700: rgba(31, 33, 33, 1);
-  --color-charcoal-800: rgba(38, 40, 40, 1);
-  --color-slate-900: rgba(19, 52, 59, 1);
-  --color-teal-300: rgba(50, 184, 198, 1);
-  --color-teal-400: rgba(45, 166, 178, 1);
-  --color-teal-500: rgba(33, 128, 141, 1);
-  --color-teal-600: rgba(29, 116, 128, 1);
-  --color-teal-700: rgba(26, 104, 115, 1);
-  --color-teal-800: rgba(41, 150, 161, 1);
-  --color-red-400: rgba(255, 84, 89, 1);
-  --color-red-500: rgba(192, 21, 47, 1);
-  --color-orange-400: rgba(230, 129, 97, 1);
-  --color-orange-500: rgba(168, 75, 47, 1);
-
-  /* RGB versions for opacity control */
-  --color-brown-600-rgb: 94, 82, 64;
-  --color-teal-500-rgb: 33, 128, 141;
-  --color-slate-900-rgb: 19, 52, 59;
-  --color-slate-500-rgb: 98, 108, 113;
-  --color-red-500-rgb: 192, 21, 47;
-  --color-red-400-rgb: 255, 84, 89;
-  --color-orange-500-rgb: 168, 75, 47;
-  --color-orange-400-rgb: 230, 129, 97;
-
-  /* Background color tokens (Light Mode) */
-  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
-  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
-  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
-  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
-  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
-  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
-  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
-  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
-
-  /* Semantic Color Tokens (Light Mode) */
-  --color-background: var(--color-cream-50);
-  --color-surface: var(--color-cream-100);
-  --color-text: var(--color-slate-900);
-  --color-text-secondary: var(--color-slate-500);
-  --color-primary: var(--color-teal-500);
-  --color-primary-hover: var(--color-teal-600);
-  --color-primary-active: var(--color-teal-700);
-  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
-  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
-  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-btn-primary-text: var(--color-cream-50);
-  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
-  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
-  --color-error: var(--color-red-500);
-  --color-success: var(--color-teal-500);
-  --color-warning: var(--color-orange-500);
-  --color-info: var(--color-slate-500);
-  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
-  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
-
-  /* Common style patterns */
-  --focus-ring: 0 0 0 3px var(--color-focus-ring);
-  --focus-outline: 2px solid var(--color-primary);
-  --status-bg-opacity: 0.15;
-  --status-border-opacity: 0.25;
-
-  /* RGB versions for opacity control */
-  --color-success-rgb: 33, 128, 141;
-  --color-error-rgb: 192, 21, 47;
-  --color-warning-rgb: 168, 75, 47;
-  --color-info-rgb: 98, 108, 113;
-
-  /* Typography */
-  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
-    Monaco, Consolas, monospace;
-  --font-size-xs: 11px;
-  --font-size-sm: 12px;
-  --font-size-base: 14px;
-  --font-size-md: 14px;
-  --font-size-lg: 16px;
-  --font-size-xl: 18px;
-  --font-size-2xl: 20px;
-  --font-size-3xl: 24px;
-  --font-size-4xl: 30px;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 550;
-  --font-weight-bold: 600;
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
-  --letter-spacing-tight: -0.01em;
-
-  /* Spacing */
-  --space-0: 0;
-  --space-1: 1px;
-  --space-2: 2px;
-  --space-4: 4px;
-  --space-6: 6px;
-  --space-8: 8px;
-  --space-10: 10px;
-  --space-12: 12px;
-  --space-16: 16px;
-  --space-20: 20px;
-  --space-24: 24px;
-  --space-32: 32px;
-
-  /* Border Radius */
-  --radius-sm: 6px;
-  --radius-base: 8px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
-  --radius-full: 9999px;
-
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
-    0 2px 4px -1px rgba(0, 0, 0, 0.02);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
-    0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
-
-  /* Animation */
-  --duration-fast: 150ms;
-  --duration-normal: 250ms;
-  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Layout */
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-}
-
-/* Dark mode colors */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-gray-400-rgb: 119, 124, 124;
-    --color-teal-300-rgb: 50, 184, 198;
-    --color-gray-300-rgb: 167, 169, 169;
-    --color-gray-200-rgb: 245, 245, 245;
-
-    --color-bg-1: rgba(29, 78, 216, 0.15);
-    --color-bg-2: rgba(180, 83, 9, 0.15);
-    --color-bg-3: rgba(21, 128, 61, 0.15);
-    --color-bg-4: rgba(185, 28, 28, 0.15);
-    --color-bg-5: rgba(107, 33, 168, 0.15);
-    --color-bg-6: rgba(194, 65, 12, 0.15);
-    --color-bg-7: rgba(190, 24, 93, 0.15);
-    --color-bg-8: rgba(8, 145, 178, 0.15);
-
-    --color-background: var(--color-charcoal-700);
-    --color-surface: var(--color-charcoal-800);
-    --color-text: var(--color-gray-200);
-    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
-    --color-primary: var(--color-teal-300);
-    --color-primary-hover: var(--color-teal-400);
-    --color-primary-active: var(--color-teal-800);
-    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
-    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
-    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
-    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
-    --color-error: var(--color-red-400);
-    --color-success: var(--color-teal-300);
-    --color-warning: var(--color-orange-400);
-    --color-info: var(--color-gray-300);
-    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
-    --color-btn-primary-text: var(--color-slate-900);
-    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
-    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
-    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
-
-    --color-success-rgb: var(--color-teal-300-rgb);
-    --color-error-rgb: var(--color-red-400-rgb);
-    --color-warning-rgb: var(--color-orange-400-rgb);
-    --color-info-rgb: var(--color-gray-300-rgb);
-  }
-}
-
-html {
-  font-size: var(--font-size-base);
-  font-family: var(--font-family-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-text);
-  background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/* Force dark theme for the application */
-html[data-color-scheme="dark"],
-html {
-  --color-background: #1a1a1a !important;
-  --color-surface: #2d2d2d !important;
-  --color-text: #f0f0f0 !important;
-  --color-text-secondary: #b0b0b0 !important;
-  --color-primary: #4A90E2 !important;
-  --color-primary-hover: #357abd !important;
-  --color-primary-active: #2968a3 !important;
-  --color-secondary: #5d5d5d !important;
-  --color-secondary-hover: #6d6d6d !important;
-  --color-secondary-active: #4d4d4d !important;
-  --color-border: #d0d0d0 !important;
-  --color-card-border: #d0d0d0 !important;
-  --color-card-border-inner: #d0d0d0 !important;
-  --color-btn-primary-text: #f0f0f0 !important;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-/* Custom styles for the Code Puzzle Challenge */
-.app-container {
-  min-height: 100vh;
-  background: var(--color-background);
-}
-
-.header {
-  background: #2d2d2d;
-  padding: var(--space-24) var(--space-16);
-  text-align: center;
-  border-bottom: 2px solid #4A90E2;
-}
-
-.header h1 {
-  color: var(--color-text);
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  margin: 0;
-  letter-spacing: var(--letter-spacing-tight);
-}
-
-.header p {
-  color: var(--color-text-secondary);
-  margin: var(--space-8) 0 0;
-  font-size: var(--font-size-lg);
-}
-
-.game-stats {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--color-surface);
-  padding: var(--space-16);
-  border: 1px solid var(--color-card-border);
-  border-radius: var(--radius-lg);
-  margin: var(--space-24) var(--space-16);
-  box-shadow: var(--shadow-sm);
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-value {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-  display: block;
-}
-
-.stat-label {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.difficulty-selector {
-  display: flex;
-  gap: var(--space-8);
-  margin: var(--space-16);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.difficulty-btn {
-  padding: var(--space-8) var(--space-16);
-  border: 1px solid var(--color-border);
-  background: var(--color-secondary);
-  color: var(--color-text);
-  border-radius: var(--radius-base);
-  cursor: pointer;
-  transition: all var(--duration-normal) var(--ease-standard);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-}
-
-.difficulty-btn:hover {
-  background: var(--color-secondary-hover);
-}
-
-.difficulty-btn.active {
-  background: var(--color-primary);
-  color: var(--color-btn-primary-text);
-  border-color: var(--color-primary);
-}
-
-.challenge-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: var(--space-16);
-}
-
-.challenge-question {
-  background: #2d2d2d;
-  padding: var(--space-20);
-  border-radius: var(--radius-lg);
-  margin-bottom: var(--space-24);
-  border: 1px solid #d0d0d0;
-}
-
-.challenge-question h3 {
-  color: var(--color-text);
-  margin: 0 0 var(--space-8) 0;
-  font-size: var(--font-size-xl);
-}
-
-.challenge-question p {
-  color: var(--color-text-secondary);
-  margin: 0;
-  font-size: var(--font-size-base);
-}
-
-.word-areas {
-  display: grid;
-  gap: var(--space-24);
-  margin-bottom: var(--space-24);
-}
-
-.word-area {
-  background: var(--color-surface);
-  border: 2px solid #d0d0d0;
-  border-radius: var(--radius-lg);
-  padding: var(--space-20);
-  min-height: 120px;
-}
-
-.word-area h4 {
-  margin: 0 0 var(--space-16) 0;
-  font-size: var(--font-size-lg);
-  color: var(--color-text);
-}
-
-.scrambled-area {
-  border-color: #d0d0d0 !important;
-  background: #8B6914 !important;
-  color: #f0f0f0;
-}
-
-.scrambled-area h4 {
-  color: #f0f0f0 !important;
-}
-
-.solution-area {
-  border-color: #d0d0d0 !important;
-  background: #1B4332 !important;
-  color: #f0f0f0;
-}
-
-.solution-area h4 {
-  color: #f0f0f0 !important;
-}
-
-.words-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-8);
-  min-height: 60px;
-}
-
-.word-block {
-  padding: var(--space-8) var(--space-12);
-  background: #3d3d3d;
-  border: 1px solid #d0d0d0;
-  border-radius: var(--radius-base);
-  cursor: pointer;
-  user-select: none;
-  transition: all var(--duration-fast) var(--ease-standard);
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: #f0f0f0;
-}
-
-.word-block:hover {
-  background: #4d4d4d;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.word-block:active {
-  transform: translateY(0);
-}
-
-.word-block.in-solution {
-  background: #2d5a3d;
-  border-color: #4A90E2;
-  color: #f0f0f0;
-}
-
-.controls {
-  display: flex;
-  gap: var(--space-12);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: var(--space-10) var(--space-20);
-  border: none;
-  border-radius: var(--radius-base);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all var(--duration-normal) var(--ease-standard);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-primary {
-  background: var(--color-primary);
-  color: var(--color-btn-primary-text);
-}
-
-.btn-primary:hover {
-  background: var(--color-primary-hover);
-}
-
-.btn-secondary {
-  background: #5d5d5d;
-  color: #f0f0f0;
-  border: 1px solid #d0d0d0;
-}
-
-.btn-secondary:hover {
-  background: #6d6d6d;
-}
-
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal.show {
-  display: flex;
-}
-
-.modal-content {
-  background: #2d2d2d;
-  padding: var(--space-32);
-  border-radius: var(--radius-lg);
-  max-width: 700px;
-  width: 95%;
-  max-height: 80vh;
-  overflow-y: auto;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid #d0d0d0;
-}
-
-.modal-content h3 {
-  margin: 0 0 var(--space-16) 0;
-  font-size: var(--font-size-2xl);
-}
-
-.modal-content.success h3 {
-  color: var(--color-success);
-}
-
-.modal-content.error h3 {
-  color: var(--color-error);
-}
-
-.modal-content p {
-  margin: 0 0 var(--space-20) 0;
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-normal);
-}
-
-.score-display {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-  margin: var(--space-16) 0;
-}
-
-.explanation {
-  background: #3d3d3d;
-  padding: var(--space-16);
-  border-radius: var(--radius-base);
-  margin: var(--space-16) 0;
-  border: 1px solid #d0d0d0;
-}
-
-.explanation strong {
-  color: var(--color-text);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .header {
-    padding: var(--space-16);
-  }
-  
-  .header h1 {
-    font-size: var(--font-size-3xl);
-  }
-  
-  .game-stats {
-    flex-direction: column;
-    gap: var(--space-16);
-  }
-  
-  .stat-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-8);
-  }
-  
-  .challenge-container {
-    padding: var(--space-8);
-  }
-  
-  .word-areas {
-    gap: var(--space-16);
-  }
-  
-  .controls {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-  }
-  
-  .modal-content {
-    padding: var(--space-20);
-  }
-}
-
-@font-face {
-  font-family: 'FKGroteskNeue';
-  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
-    format('woff2');
-}
+        body {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .bounce-in {
+            animation: bounceIn 0.6s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .pulse-success {
+            animation: pulseSuccess 1s ease-in-out;
+        }
+        @keyframes pulseSuccess {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .sortable-ghost {
+            opacity: 0.5;
+            background: #e2e8f0 !important;
+        }
+        .sortable-chosen {
+            transform: rotate(5deg);
+        }
+        .quiz-card {
+            transition: all 0.3s ease;
+            cursor: grab;
+        }
+        .quiz-card:active {
+            cursor: grabbing;
+        }
+        /* CRITICAL FIX: Ensure Build Query elements never get disabled styling */
+        #drop-zone .quiz-card {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            cursor: grab !important;
+        }
+        #drop-zone .quiz-card:active {
+            cursor: grabbing !important;
+        }
+        .quiz-card.correct {
+            animation: correctPulse 0.6s ease-out;
+        }
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); background-color: #10b981; }
+            100% { transform: scale(1); }
+        }
+        .progress-bar {
+            transition: width 1s ease-out;
+        }
     </style>
 </head>
-<body data-color-scheme="dark">
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <h1>SQL Quiz</h1>
-            <p>Rearrange scrambled SQL keywords to master database queries</p>
-        </header>
+<body class="bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 min-h-screen">
+    <!-- Homepage -->
+    <div id="homepage" class="min-h-screen flex items-center justify-center p-4">
+        <div class="text-center bounce-in">
+            <div class="mb-8">
+                <div class="text-8xl mb-4">🗃️</div>
+                <h1 class="text-6xl font-bold text-white mb-4 drop-shadow-lg">SQL Quest</h1>
+                <p class="text-xl text-white mb-8 drop-shadow max-w-md mx-auto">
+                    Learn SQL like a game! Master database queries with fun, interactive lessons designed for beginners.
+                </p>
+            </div>
+            <button onclick="showLessons()" class="bg-yellow-400 hover:bg-yellow-500 text-purple-800 font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                🚀 Start Learning!
+            </button>
+        </div>
+    </div>
 
-        <!-- Game Stats -->
-        <div class="game-stats">
-            <div class="stat-item">
-                <span class="stat-value" id="current-question">1</span>
-                <span class="stat-label">Question</span>
+    <!-- Lesson List -->
+    <div id="lesson-list" class="hidden min-h-screen p-4 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <button onclick="showHomepage()" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg mb-4 transition-all duration-300">
+                    ← Back to Home
+                </button>
+                <h2 class="text-4xl font-bold text-white mb-2">Your SQL Journey</h2>
+                <div class="bg-white/20 rounded-full p-4 inline-block">
+                    <div class="text-white">
+                        <span class="text-2xl font-bold" id="xp-display">0</span> XP
+                        <div class="w-64 bg-white/20 rounded-full h-4 mt-2">
+                            <div id="progress-bar" class="bg-yellow-400 h-4 rounded-full progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="stat-item">
-                <span class="stat-value" id="total-questions">10</span>
-                <span class="stat-label">Total</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value" id="score">0</span>
-                <span class="stat-label">Score</span>
+            
+            <div id="lessons-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Lessons will be populated by JavaScript -->
             </div>
         </div>
+    </div>
 
-
-
-        <!-- Challenge Container -->
-        <div class="challenge-container">
-            <!-- Current Challenge Question -->
-            <div class="challenge-question">
-                <h3 id="question-title">Loading...</h3>
-                <p id="question-description">Please wait while we load your challenge.</p>
+    <!-- Lesson Content -->
+    <div id="lesson-content" class="hidden min-h-screen p-4 bg-gradient-to-br from-green-400 via-blue-500 to-purple-600">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <button onclick="showLessons()" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg mb-4 transition-all duration-300">
+                    ← Back to Lessons
+                </button>
             </div>
-
-            <!-- Word Areas -->
-            <div class="word-areas">
-                <!-- Scrambled Words Area -->
-                <div class="word-area scrambled-area">
-                    <h4>Scrambled Words (Click to Move)</h4>
-                    <div class="words-container" id="scrambled-words"></div>
+            
+            <!-- Explanation Phase -->
+            <div id="explanation-phase" class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+                <div class="text-center mb-6">
+                    <div class="text-6xl mb-4" id="lesson-emoji">📚</div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2" id="lesson-title"></h3>
+                    <p class="text-lg text-gray-600" id="lesson-concept"></p>
                 </div>
-
-                <!-- Solution Area -->
-                <div class="word-area solution-area">
-                    <h4>Your Solution (Click to Remove)</h4>
-                    <div class="words-container" id="solution-words"></div>
+                
+                <div class="bg-blue-50 rounded-2xl p-6 mb-6">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Let's Learn! 🎓</h4>
+                    <p class="text-gray-700 text-lg" id="lesson-explanation"></p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-6 mb-6">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">Example Query:</h4>
+                    <div class="bg-gray-800 text-green-400 p-4 rounded-lg font-mono text-lg" id="example-query"></div>
+                    <p class="text-gray-600 mt-3" id="example-explanation"></p>
+                </div>
+                
+                <!-- Sample Data Table -->
+                <div id="sample-data" class="bg-yellow-50 rounded-2xl p-6 mb-6">
+                    <h4 class="text-xl font-semibold text-yellow-800 mb-3">Sample Data 📊</h4>
+                    <div id="data-table" class="overflow-x-auto"></div>
+                </div>
+                
+                <!-- Syntax Breakdown -->
+                <div id="syntax-breakdown" class="bg-purple-50 rounded-2xl p-6 mb-6">
+                    <h4 class="text-xl font-semibold text-purple-800 mb-3">Understanding Each Part 🧩</h4>
+                    <div id="breakdown-content" class="space-y-3"></div>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="startQuiz()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+                        Ready for the Quiz! 🧩
+                    </button>
                 </div>
             </div>
-
-            <!-- Controls -->
-            <div class="controls">
-                <button class="btn btn-secondary" id="reset-btn">Reset</button>
-                <button class="btn btn-primary" id="submit-btn" disabled>Submit Answer</button>
-                <button class="btn btn-secondary" id="end-quiz-btn">End Quiz</button>
-                <button class="btn btn-primary" id="next-btn" style="display: none;">Next Question</button>
-            </div>
-        </div>
-
-        <!-- Modal for Feedback -->
-        <div class="modal" id="feedback-modal">
-            <div class="modal-content" id="modal-content">
-                <h3 id="modal-title">Result</h3>
-                <p id="modal-message">Your feedback message will appear here.</p>
-                <div class="score-display" id="modal-score"></div>
-                <div class="explanation" id="modal-explanation" style="display: none;">
-                    <strong>Explanation:</strong>
-                    <p id="explanation-text"></p>
+            
+            <!-- Quiz Phase -->
+            <div id="quiz-phase" class="hidden bg-white rounded-3xl shadow-xl p-8">
+                <div class="text-center mb-6">
+                    <div class="text-6xl mb-4">🧩</div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Quiz Time!</h3>
+                    <p class="text-lg text-gray-600">Drag the parts below to build the correct SQL query</p>
                 </div>
-                <button class="btn btn-primary" id="modal-close">Next Question</button>
+                
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Build this query:</h4>
+                    <div class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-16" id="drop-zone">
+                        <div class="flex flex-wrap gap-2 justify-center items-center min-h-12">
+                            <p class="text-gray-500 text-center w-full" id="drop-hint">Drag query parts here (arrange horizontally)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Available Parts:</h4>
+                    <div id="quiz-parts" class="flex flex-wrap gap-4 justify-center">
+                        <!-- Quiz parts will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="checkAnswer()" id="check-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Check Answer 🔍
+                    </button>
+                </div>
+                
+                <div id="result-message" class="hidden mt-6 text-center p-4 rounded-lg font-bold text-lg"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // SQL Questions Data with Detailed Explanations
-        const sqlQuestions = [
+        // Application State
+        let currentLesson = null;
+        let userProgress = { completed: [], xp: 0 };
+        let sortableInstance = null;
+        let droppedParts = [];
+        let usedParts = new Set(); // Track which parts are currently used
+        
+        // Lesson Data
+        const lessons = [
             {
                 id: 1,
-                instruction: "Create a basic SELECT query to get all columns from the users table",
-                scrambled: ["*", "users", "select", "from"],
-                correct: ["select", "*", "from", "users"],
-                explanation: "Basic SELECT Query - Foundation of SQL",
-                what_it_does: "Retrieves all columns and all rows from the users table",
-                use_cases: [
-                    "Getting a complete overview of user data for analysis",
-                    "Exporting all user information for backup purposes", 
-                    "Initial data exploration when examining a new table",
-                    "Creating reports that need all user details"
+                title: "What is SELECT?",
+                concept: "SELECT Basics",
+                emoji: "🔍",
+                explanation: "SELECT is like asking 'Show me!' to the database. It's the magic word that tells the database you want to see some information! Think of it like asking a librarian to show you books.",
+                example_query: "SELECT * FROM users",
+                example_explanation: "This means: 'Show me everything (*) from the users table'",
+                syntax_breakdown: [
+                    { part: "SELECT", color: "bg-blue-500", explanation: "Points to what you want to see - like raising your hand to ask for something!" },
+                    { part: "*", color: "bg-green-500", explanation: "Means 'everything' - like asking for all the cookies in the jar!" },
+                    { part: "FROM", color: "bg-purple-500", explanation: "Shows where to look - like telling someone which box to check!" },
+                    { part: "users", color: "bg-orange-500", explanation: "The name of the table - like the label on a filing cabinet!" }
                 ],
-                detailed_explanation: "This is the most fundamental SQL query. SELECT * means 'select all columns' - the asterisk (*) is a wildcard that represents every column in the table. FROM users specifies which table to query. This retrieves every single row and column from the users table.",
-                syntax_breakdown: {
-                    "SELECT": "Keyword that starts every query to retrieve data",
-                    "*": "Wildcard that means 'all columns'", 
-                    "FROM": "Keyword that specifies which table to query",
-                    "users": "The name of the table containing the data"
-                },
-                best_practices: "Use SELECT * carefully in production - it can be slow on large tables. Better to specify only the columns you need."
+                quiz_parts: [
+                    { text: "SELECT", order: 1, color: "bg-blue-500" },
+                    { text: "*", order: 2, color: "bg-green-500" },
+                    { text: "FROM", order: 3, color: "bg-purple-500" },
+                    { text: "users", order: 4, color: "bg-orange-500" }
+                ],
+                locked: false,
+                sampleTable: 'users'
             },
             {
                 id: 2,
-                instruction: "Select specific columns (name, email) from the customers table",
-                scrambled: ["customers", "select", "name", ",", "email", "from"],
-                correct: ["select", "name", ",", "email", "from", "customers"],
-                explanation: "Selective Column Retrieval - Optimized Queries",
-                what_it_does: "Retrieves only the name and email columns from all rows in the customers table",
-                use_cases: [
-                    "Creating mailing lists with just contact information",
-                    "Displaying user profiles with limited information",
-                    "Generating reports that only need specific data fields",
-                    "Improving query performance by fetching only required data"
+                title: "Choosing Columns",
+                concept: "SELECT Specific Columns",
+                emoji: "🎯",
+                explanation: "Instead of asking for everything (*), we can ask for specific things! It's like asking for just the names instead of all the information about people.",
+                example_query: "SELECT name, age FROM users",
+                example_explanation: "This means: 'Show me only the name and age columns from the users table'",
+                syntax_breakdown: [
+                    { part: "SELECT", color: "bg-blue-500", explanation: "Points to what you want to see" },
+                    { part: "name, age", color: "bg-green-500", explanation: "Specific things you want - separated by commas like items in a shopping list!" },
+                    { part: "FROM", color: "bg-purple-500", explanation: "Shows where to look" },
+                    { part: "users", color: "bg-orange-500", explanation: "The table name" }
                 ],
-                detailed_explanation: "Instead of using *, this query specifies exactly which columns to return. This is more efficient because the database only needs to retrieve and transfer the requested columns, not all data.",
-                syntax_breakdown: {
-                    "SELECT": "Starts the data retrieval command",
-                    "name, email": "Specific column names separated by commas",
-                    ",": "Comma separator between column names",
-                    "FROM": "Specifies the source table",
-                    "customers": "The table containing customer data"
-                },
-                best_practices: "Always specify only the columns you need. This improves performance, reduces network traffic, and makes your queries more maintainable."
+                quiz_parts: [
+                    { text: "SELECT", order: 1, color: "bg-blue-500" },
+                    { text: "name, age", order: 2, color: "bg-green-500" },
+                    { text: "FROM", order: 3, color: "bg-purple-500" },
+                    { text: "users", order: 4, color: "bg-orange-500" }
+                ],
+                locked: true,
+                sampleTable: 'users'
             },
             {
                 id: 3,
-                instruction: "Add a WHERE clause to find users older than 25",
-                scrambled: ["select", "*", "from", "users", "where", "age", ">", "25"],
-                correct: ["select", "*", "from", "users", "where", "age", ">", "25"],
-                explanation: "Conditional Filtering - WHERE Clause",
-                what_it_does: "Retrieves all data for users whose age is greater than 25",
-                use_cases: [
-                    "Finding adult users for age-restricted content",
-                    "Targeting marketing campaigns to specific age groups", 
-                    "Creating demographic reports and analytics",
-                    "Filtering data for compliance with age-related regulations"
+                title: "FROM Which Table?",
+                concept: "Understanding FROM",
+                emoji: "📂",
+                explanation: "FROM tells the database which table (like a filing cabinet) to look in. Every query needs to know where to look! It's like telling someone which drawer to search in.",
+                example_query: "SELECT title FROM books",
+                example_explanation: "This means: 'Show me the title column from the books table'",
+                syntax_breakdown: [
+                    { part: "SELECT", color: "bg-blue-500", explanation: "Points to what you want to see" },
+                    { part: "title", color: "bg-green-500", explanation: "The specific column we want to see" },
+                    { part: "FROM", color: "bg-purple-500", explanation: "Shows where to look - this is very important!" },
+                    { part: "books", color: "bg-orange-500", explanation: "The table name - like choosing which bookshelf to look at!" }
                 ],
-                detailed_explanation: "The WHERE clause adds a condition to filter results. Only rows that meet the condition (age > 25) will be returned. This is fundamental for data filtering and is used in almost every real-world query.",
-                syntax_breakdown: {
-                    "SELECT *": "Retrieve all columns",
-                    "FROM users": "From the users table", 
-                    "WHERE": "Keyword that introduces a condition",
-                    "age": "The column to check",
-                    ">": "Greater than operator",
-                    "25": "The value to compare against"
-                },
-                best_practices: "Use WHERE clauses to limit results and improve performance. Index columns that are frequently used in WHERE conditions."
+                quiz_parts: [
+                    { text: "SELECT", order: 1, color: "bg-blue-500" },
+                    { text: "title", order: 2, color: "bg-green-500" },
+                    { text: "FROM", order: 3, color: "bg-purple-500" },
+                    { text: "books", order: 4, color: "bg-orange-500" }
+                ],
+                locked: true,
+                sampleTable: 'books'
             },
             {
                 id: 4,
-                instruction: "Order users by age in ascending order",
-                scrambled: ["select", "*", "from", "users", "order", "by", "age", "asc"],
-                correct: ["select", "*", "from", "users", "order", "by", "age", "asc"],
-                explanation: "Data Sorting - ORDER BY Clause",
-                what_it_does: "Retrieves all users sorted by age from youngest to oldest",
-                use_cases: [
-                    "Displaying user lists in chronological order",
-                    "Creating age-based rankings and leaderboards",
-                    "Organizing data for reports and presentations",
-                    "Finding youngest or oldest users in datasets"
+                title: "WHERE Conditions",
+                concept: "Filtering with WHERE",
+                emoji: "🔎",
+                explanation: "WHERE is like a filter! It helps us find only the information we want, like finding all books by a specific author or people of a certain age.",
+                example_query: "SELECT * FROM users WHERE age > 18",
+                example_explanation: "This means: 'Show me everything from users table, but only for people older than 18'",
+                syntax_breakdown: [
+                    { part: "SELECT", color: "bg-blue-500", explanation: "Points to what you want to see" },
+                    { part: "*", color: "bg-green-500", explanation: "Everything in the table" },
+                    { part: "FROM", color: "bg-purple-500", explanation: "Shows where to look" },
+                    { part: "users", color: "bg-orange-500", explanation: "The table name" },
+                    { part: "WHERE", color: "bg-red-500", explanation: "Sets up a rule - like saying 'only if...'!" },
+                    { part: "age > 18", color: "bg-yellow-500", explanation: "The rule itself - only people older than 18!" }
                 ],
-                detailed_explanation: "ORDER BY sorts the results based on specified column(s). ASC means ascending order (smallest to largest). You can also use DESC for descending order (largest to smallest).",
-                syntax_breakdown: {
-                    "SELECT * FROM users": "Basic query to get all user data",
-                    "ORDER BY": "Keyword that specifies sorting",
-                    "age": "The column to sort by",
-                    "ASC": "Ascending order (optional - ASC is default)"
-                },
-                best_practices: "ORDER BY should come at the end of your query. For better performance on large tables, consider indexing columns used for sorting."
+                quiz_parts: [
+                    { text: "SELECT", order: 1, color: "bg-blue-500" },
+                    { text: "*", order: 2, color: "bg-green-500" },
+                    { text: "FROM", order: 3, color: "bg-purple-500" },
+                    { text: "users", order: 4, color: "bg-orange-500" },
+                    { text: "WHERE", order: 5, color: "bg-red-500" },
+                    { text: "age > 18", order: 6, color: "bg-yellow-500" }
+                ],
+                locked: true,
+                sampleTable: 'users'
             },
             {
                 id: 5,
-                instruction: "Select users where name equals 'John'",
-                scrambled: ["select", "*", "from", "users", "where", "name", "=", "'John'"],
-                correct: ["select", "*", "from", "users", "where", "name", "=", "'John'"],
-                explanation: "Exact Text Matching - String Equality",
-                what_it_does: "Finds all users whose name field exactly matches 'John'",
-                use_cases: [
-                    "Looking up specific users by name",
-                    "Finding all instances of a particular value",
-                    "User authentication and login systems",
-                    "Searching for exact matches in customer databases"
+                title: "ORDER BY Sorting",
+                concept: "Sorting Results",
+                emoji: "📋",
+                explanation: "ORDER BY arranges our results in order, like organizing books alphabetically by title or arranging people by age from youngest to oldest!",
+                example_query: "SELECT * FROM users ORDER BY name",
+                example_explanation: "This means: 'Show me everything from users table, arranged alphabetically by name'",
+                syntax_breakdown: [
+                    { part: "SELECT", color: "bg-blue-500", explanation: "Points to what you want to see" },
+                    { part: "*", color: "bg-green-500", explanation: "Everything in the table" },
+                    { part: "FROM", color: "bg-purple-500", explanation: "Shows where to look" },
+                    { part: "users", color: "bg-orange-500", explanation: "The table name" },
+                    { part: "ORDER BY", color: "bg-pink-500", explanation: "Says 'arrange these in order' - like sorting your toys!" },
+                    { part: "name", color: "bg-indigo-500", explanation: "What to sort by - alphabetically by name!" }
                 ],
-                detailed_explanation: "This query demonstrates exact string matching using the equals operator. Text values must be enclosed in single quotes. The match is typically case-sensitive depending on database settings.",
-                syntax_breakdown: {
-                    "SELECT * FROM users": "Get all data from users table",
-                    "WHERE": "Introduces the filter condition",
-                    "name": "The column to check",
-                    "=": "Equals operator for exact matching",
-                    "'John'": "Text value in single quotes"
-                },
-                best_practices: "Always use single quotes for text values. For case-insensitive searches, use UPPER() or LOWER() functions. Consider using LIKE for partial matches."
-            },
-            {
-                id: 6,
-                instruction: "Count all records in the products table",
-                scrambled: ["select", "count", "(", "*", ")", "from", "products"],
-                correct: ["select", "count", "(", "*", ")", "from", "products"],
-                explanation: "Aggregate Functions - Counting Rows",
-                what_it_does: "Returns the total number of rows (records) in the products table",
-                use_cases: [
-                    "Getting inventory counts for business reports",
-                    "Monitoring database size and growth",
-                    "Validating data import/export processes",
-                    "Creating dashboard metrics and KPIs"
+                quiz_parts: [
+                    { text: "SELECT", order: 1, color: "bg-blue-500" },
+                    { text: "*", order: 2, color: "bg-green-500" },
+                    { text: "FROM", order: 3, color: "bg-purple-500" },
+                    { text: "users", order: 4, color: "bg-orange-500" },
+                    { text: "ORDER BY", order: 5, color: "bg-pink-500" },
+                    { text: "name", order: 6, color: "bg-indigo-500" }
                 ],
-                detailed_explanation: "COUNT(*) is an aggregate function that returns the number of rows. Unlike SELECT *, this returns just one number - the total count. This is essential for analytics and reporting.",
-                syntax_breakdown: {
-                    "SELECT": "Starts the query",
-                    "COUNT": "Aggregate function to count rows",
-                    "(*)": "Counts all rows including NULLs",
-                    "FROM products": "Specifies the table to count"
-                },
-                best_practices: "COUNT(*) counts all rows. Use COUNT(column_name) to count non-NULL values in a specific column. Other useful aggregate functions include SUM, AVG, MIN, MAX."
-            },
-            {
-                id: 7,
-                instruction: "Join users and orders tables on user_id",
-                scrambled: ["select", "*", "from", "users", "join", "orders", "on", "users.id", "=", "orders.user_id"],
-                correct: ["select", "*", "from", "users", "join", "orders", "on", "users.id", "=", "orders.user_id"],
-                explanation: "Table Relations - INNER JOIN",
-                what_it_does: "Combines data from users and orders tables where there's a matching relationship",
-                use_cases: [
-                    "Getting customer information along with their order history",
-                    "Creating comprehensive reports that need data from multiple tables",
-                    "Analyzing relationships between different entities",
-                    "Building complex business intelligence queries"
-                ],
-                detailed_explanation: "JOIN connects related data from multiple tables. This INNER JOIN returns only rows where there's a match in both tables - users who have placed orders. The ON clause specifies how tables are related.",
-                syntax_breakdown: {
-                    "SELECT * FROM users": "Start with the users table",
-                    "JOIN orders": "Connect to the orders table",
-                    "ON": "Specifies the join condition",
-                    "users.id = orders.user_id": "Matches user IDs between tables"
-                },
-                best_practices: "Use table aliases for cleaner syntax. Consider LEFT JOIN to include users without orders. Index foreign key columns for better JOIN performance."
-            },
-            {
-                id: 8,
-                instruction: "Group products by category and count them",
-                scrambled: ["select", "category", ",", "count", "(", "*", ")", "from", "products", "group", "by", "category"],
-                correct: ["select", "category", ",", "count", "(", "*", ")", "from", "products", "group", "by", "category"],
-                explanation: "Data Aggregation - GROUP BY with COUNT",
-                what_it_does: "Groups products by their category and shows how many products exist in each category",
-                use_cases: [
-                    "Creating inventory reports by product category",
-                    "Analyzing sales distribution across different product types",
-                    "Building dashboard summaries and charts",
-                    "Understanding data composition and patterns"
-                ],
-                detailed_explanation: "GROUP BY combines rows with the same values into summary rows. Combined with COUNT(*), this shows how many items exist in each group. This is essential for creating summaries and analytics.",
-                syntax_breakdown: {
-                    "SELECT category": "The column to group by",
-                    ", COUNT(*)": "Count how many rows in each group",
-                    "FROM products": "The source table",
-                    "GROUP BY category": "Group rows by category values"
-                },
-                best_practices: "All non-aggregate columns in SELECT must appear in GROUP BY. Use HAVING to filter groups (like WHERE for GROUP BY). Combine with ORDER BY to sort results."
+                locked: true,
+                sampleTable: 'users'
             }
         ];
-
-        // Scoring system
-        const scoringSystem = {
-            pointsPerQuestion: 10,
-            totalQuestions: 8,
-            perfectScore: 80
+        
+        // Sample Data
+        const sampleData = {
+            users: [
+                { id: 1, name: "Alice", age: 25, city: "New York" },
+                { id: 2, name: "Bob", age: 30, city: "London" },
+                { id: 3, name: "Charlie", age: 22, city: "Paris" }
+            ],
+            books: [
+                { id: 1, title: "Harry Potter", author: "J.K. Rowling", year: 1997 },
+                { id: 2, title: "Lord of the Rings", author: "J.R.R. Tolkien", year: 1954 },
+                { id: 3, title: "The Hobbit", author: "J.R.R. Tolkien", year: 1937 }
+            ]
         };
-
-        // Completion messages
-        const messages = {
-            questionCorrect: "🎉 Excellent! Your SQL query is correct!",
-            quizComplete: "🏆 Congratulations! You've mastered these SQL basics!",
-            encouragement: "Don't worry, try again! SQL takes practice to master."
-        };
-
-        // Game state
-        let currentQuestionIndex = 0;
-        let currentQuestion = null;
-        let userSolution = [];
-        let scrambledWords = [];
-        let totalScore = 0;
-        let questionsCompleted = [];
-        let userAnswers = [];
-
-        // DOM elements
-        const elements = {
-            questionTitle: document.getElementById('question-title'),
-            questionDescription: document.getElementById('question-description'),
-            scrambledContainer: document.getElementById('scrambled-words'),
-            solutionContainer: document.getElementById('solution-words'),
-            submitBtn: document.getElementById('submit-btn'),
-            resetBtn: document.getElementById('reset-btn'),
-            nextBtn: document.getElementById('next-btn'),
-            endQuizBtn: document.getElementById('end-quiz-btn'),
-            modal: document.getElementById('feedback-modal'),
-            modalContent: document.getElementById('modal-content'),
-            modalTitle: document.getElementById('modal-title'),
-            modalMessage: document.getElementById('modal-message'),
-            modalScore: document.getElementById('modal-score'),
-            modalExplanation: document.getElementById('modal-explanation'),
-            explanationText: document.getElementById('explanation-text'),
-            modalClose: document.getElementById('modal-close'),
-            scoreDisplay: document.getElementById('score'),
-            currentQuestionDisplay: document.getElementById('current-question'),
-            totalQuestionsDisplay: document.getElementById('total-questions')
-        };
-
-        // Initialize game
-        function initGame() {
-            // Set dark theme on document
-            document.documentElement.setAttribute('data-color-scheme', 'dark');
-            updateStats();
-            loadQuestion();
-            setupEventListeners();
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            elements.submitBtn.addEventListener('click', submitAnswer);
-            elements.resetBtn.addEventListener('click', resetQuestion);
-            elements.nextBtn.addEventListener('click', nextQuestion);
-            elements.modalClose.addEventListener('click', handleModalClose);
-            elements.endQuizBtn.addEventListener('click', endQuiz);
-
-            // Modal click outside to close
-            elements.modal.addEventListener('click', (e) => {
-                if (e.target === elements.modal) {
-                    closeModal();
-                }
-            });
-        }
-
-        // Load current question
-        function loadQuestion() {
-            if (currentQuestionIndex >= sqlQuestions.length) {
-                // All questions completed
-                showCompletionMessage();
-                return;
-            }
-
-            currentQuestion = sqlQuestions[currentQuestionIndex];
-            scrambledWords = [...currentQuestion.scrambled];
-            userSolution = [];
-            
-            // Update UI
-            elements.questionTitle.textContent = currentQuestion.instruction;
-            elements.questionDescription.textContent = `Question ${currentQuestionIndex + 1} of ${sqlQuestions.length}`;
-            
-            renderWords();
-            updateSubmitButton();
-            elements.nextBtn.style.display = 'none';
-        }
-
-        // Render word blocks
-        function renderWords() {
-            // Clear containers
-            elements.scrambledContainer.innerHTML = '';
-            elements.solutionContainer.innerHTML = '';
-
-            // Render scrambled words
-            scrambledWords.forEach((word, index) => {
-                const wordElement = createWordElement(word, 'scrambled', index);
-                elements.scrambledContainer.appendChild(wordElement);
-            });
-
-            // Render solution words
-            userSolution.forEach((word, index) => {
-                const wordElement = createWordElement(word, 'solution', index);
-                elements.solutionContainer.appendChild(wordElement);
-            });
-        }
-
-        // Create word element
-        function createWordElement(word, type, index) {
-            const element = document.createElement('div');
-            element.className = `word-block ${type === 'solution' ? 'in-solution' : ''}`;
-            element.textContent = word;
-            element.addEventListener('click', () => moveWord(word, type, index));
-            return element;
-        }
-
-        // Move word between areas
-        function moveWord(word, fromType, index) {
-            if (fromType === 'scrambled') {
-                // Move from scrambled to solution
-                scrambledWords.splice(index, 1);
-                userSolution.push(word);
-            } else {
-                // Move from solution to scrambled
-                userSolution.splice(index, 1);
-                scrambledWords.push(word);
-            }
-            
-            renderWords();
-            updateSubmitButton();
-        }
-
-        // Update submit button state
-        function updateSubmitButton() {
-            elements.submitBtn.disabled = userSolution.length === 0;
-        }
-
-        // Submit answer
-        function submitAnswer() {
-            const isCorrect = arraysEqual(userSolution, currentQuestion.correct);
-            
-            // Store user answer
-            userAnswers[currentQuestionIndex] = {
-                question: currentQuestion.instruction,
-                userAnswer: [...userSolution],
-                correctAnswer: [...currentQuestion.correct],
-                isCorrect: isCorrect
-            };
-            
-            if (isCorrect && !questionsCompleted.includes(currentQuestionIndex)) {
-                questionsCompleted.push(currentQuestionIndex);
-                totalScore += scoringSystem.pointsPerQuestion;
-                elements.scoreDisplay.textContent = totalScore;
-            }
-            
-            // Show neutral feedback without indicating correctness
-            showFeedback();
-        }
-
-        // Check if arrays are equal
-        function arraysEqual(a, b) {
-            if (a.length !== b.length) return false;
-            for (let i = 0; i < a.length; i++) {
-                if (a[i] !== b[i]) return false;
-            }
-            return true;
-        }
-
-
-
-        // Show feedback modal with detailed explanations
-        function showFeedback() {
-            const isCorrect = arraysEqual(userSolution, currentQuestion.correct);
-            const correctAnswer = currentQuestion.correct.join(' ');
-            const userAnswer = userSolution.join(' ');
-            
-            // Set modal styling based on correctness
-            elements.modalContent.className = isCorrect ? 'modal-content success' : 'modal-content error';
-            elements.modalTitle.textContent = isCorrect ? '🎉 Correct!' : '💭 Let\'s Learn';
-            
-            // Create detailed explanation HTML
-            let explanationHTML = `
-                <div style="text-align: left; margin: 20px 0;">
-                    <div style="background: #3d3d3d; padding: 15px; border-radius: var(--radius-base); margin-bottom: 15px; border: 1px solid #d0d0d0;">
-                        <strong style="color: #4A90E2; font-size: 16px;">${currentQuestion.explanation}</strong>
-                    </div>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">📋 Correct Answer:</strong>
-                        <code style="background: #1B4332; color: #f0f0f0; padding: 8px 12px; border-radius: 4px; font-family: var(--font-family-mono); display: block; border: 1px solid #d0d0d0;">${correctAnswer}</code>
-                    </div>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">💡 What This Query Does:</strong>
-                        <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.5;">${currentQuestion.what_it_does}</p>
-                    </div>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">🎯 Real-World Use Cases:</strong>
-                        <ul style="color: var(--color-text-secondary); margin: 0; padding-left: 20px; line-height: 1.5;">
-                            ${currentQuestion.use_cases.map(useCase => `<li style="margin-bottom: 4px;">${useCase}</li>`).join('')}
-                        </ul>
-                    </div>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">🔍 Detailed Explanation:</strong>
-                        <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.5;">${currentQuestion.detailed_explanation}</p>
-                    </div>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">⚙️ Syntax Breakdown:</strong>
-                        <div style="background: #2d2d2d; padding: 12px; border-radius: 4px; border: 1px solid #3d3d3d;">
-                            ${Object.entries(currentQuestion.syntax_breakdown).map(([key, value]) => 
-                                `<div style="margin-bottom: 6px;"><code style="color: #4A90E2; background: none; padding: 0;">${key}</code>: <span style="color: var(--color-text-secondary);">${value}</span></div>`
-                            ).join('')}
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: var(--color-text); display: block; margin-bottom: 8px;">💡 Best Practices:</strong>
-                        <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.5; font-style: italic;">${currentQuestion.best_practices}</p>
-                    </div>
-                </div>
-            `;
-            
-            elements.modalMessage.innerHTML = explanationHTML;
-            elements.modalScore.style.display = 'none';
-            elements.modalExplanation.style.display = 'none';
-            elements.modalClose.textContent = currentQuestionIndex === sqlQuestions.length - 1 ? 'Finish Quiz' : 'Next Question';
-            elements.modal.classList.add('show');
-        }
-
-        // Close modal
-        function closeModal() {
-            elements.modal.classList.remove('show');
-        }
-
-        // Handle modal close button - advance to next question
-        function handleModalClose() {
-            closeModal();
-            if (currentQuestionIndex >= sqlQuestions.length - 1) {
-                // Last question completed - show final results
-                currentQuestionIndex++;
-                showCompletionMessage();
-            } else {
-                nextQuestion();
-            }
-        }
-
-        // Reset current question
-        function resetQuestion() {
-            scrambledWords = [...currentQuestion.scrambled];
-            userSolution = [];
-            renderWords();
-            updateSubmitButton();
-        }
-
-        // Next question
-        function nextQuestion() {
-            currentQuestionIndex++;
-            updateStats();
-            loadQuestion();
-            closeModal();
-        }
-
-        // Update stats display
-        function updateStats() {
-            elements.currentQuestionDisplay.textContent = currentQuestionIndex + 1;
-            elements.totalQuestionsDisplay.textContent = sqlQuestions.length;
-            elements.scoreDisplay.textContent = totalScore;
-        }
-
-        // End quiz function
-        function endQuiz() {
-            showFinalResults();
-        }
-
-        // Show completion message
-        function showCompletionMessage() {
-            showFinalResults();
-        }
-
-        // Show final results with detailed explanations
-        function showFinalResults() {
-            const finalScore = questionsCompleted.length;
-            const totalPossibleScore = finalScore * scoringSystem.pointsPerQuestion;
-            
-            let resultHTML = `<div style="text-align: center;">`;
-            resultHTML += `<h2>🎯 SQL Quiz Complete!</h2>`;
-            resultHTML += `<div class="score-display" style="font-size: 28px; margin: 20px 0;">Final Score: ${totalScore}/${scoringSystem.perfectScore} points</div>`;
-            resultHTML += `<div style="font-size: 18px; margin-bottom: 30px; color: var(--color-text-secondary);">Questions Answered Correctly: ${finalScore}/${sqlQuestions.length}</div>`;
-            resultHTML += `</div>`;
-            
-            resultHTML += `<div style="text-align: left; max-height: 70vh; overflow-y: auto; margin: 20px 0; padding: 20px; background: #2d2d2d; border-radius: var(--radius-lg); border: 1px solid #3d3d3d;">`;
-            resultHTML += `<h3 style="margin-top: 0;">📋 Complete Review with Explanations</h3>`;
-            
-            // Show all questions up to current index or all answered questions
-            const maxQuestions = Math.max(userAnswers.length, currentQuestionIndex, 1);
-            
-            for (let i = 0; i < maxQuestions; i++) {
-                const answer = userAnswers[i];
-                const question = sqlQuestions[i];
-                
-                if (answer || question) {
-                    const isCorrect = answer ? answer.isCorrect : false;
-                    const statusIcon = isCorrect ? '✅' : '❌';
-                    const statusColor = isCorrect ? '#4A90E2' : '#ff6b6b';
-                    const currentQ = question || sqlQuestions[i];
-                    
-                    resultHTML += `<div style="margin-bottom: 30px; padding: 20px; border: 1px solid #d0d0d0; border-radius: var(--radius-lg); background: #1a1a1a;">`;
-                    
-                    // Question header
-                    resultHTML += `<div style="display: flex; align-items: center; margin-bottom: 15px;">`;
-                    resultHTML += `<div style="font-weight: bold; font-size: 16px; color: #f0f0f0;">Question ${i + 1}: <span style="color: ${statusColor}">${statusIcon}</span></div>`;
-                    resultHTML += `</div>`;
-                    
-                    // Question instruction
-                    resultHTML += `<div style="font-size: 14px; margin-bottom: 12px; color: #f0f0f0; font-weight: 500;">${currentQ.instruction}</div>`;
-                    
-                    // User answer vs correct answer
-                    if (answer) {
-                        resultHTML += `<div style="margin-bottom: 10px;"><strong style="color: #b0b0b0;">Your answer:</strong> <code style="background: #3d3d3d; color: #f0f0f0; padding: 4px 8px; border-radius: 3px; font-family: var(--font-family-mono); border: 1px solid #d0d0d0;">${answer.userAnswer.join(' ')}</code></div>`;
-                    } else {
-                        resultHTML += `<div style="margin-bottom: 10px;"><strong style="color: #b0b0b0;">Your answer:</strong> <span style="color: #ff6b6b;">Not answered</span></div>`;
-                    }
-                    
-                    resultHTML += `<div style="margin-bottom: 15px;"><strong style="color: #b0b0b0;">Correct answer:</strong> <code style="background: #1B4332; color: #f0f0f0; padding: 4px 8px; border-radius: 3px; font-family: var(--font-family-mono); border: 1px solid #d0d0d0;">${currentQ.correct.join(' ')}</code></div>`;
-                    
-                    // Detailed explanation section
-                    resultHTML += `<div style="border-top: 1px solid #3d3d3d; padding-top: 15px; margin-top: 15px;">`;
-                    resultHTML += `<div style="background: #2d2d2d; padding: 12px; border-radius: 6px; margin-bottom: 12px; border: 1px solid #3d3d3d;">`;
-                    resultHTML += `<strong style="color: #4A90E2; font-size: 14px;">${currentQ.explanation}</strong>`;
-                    resultHTML += `</div>`;
-                    
-                    resultHTML += `<div style="margin-bottom: 10px;">`;
-                    resultHTML += `<strong style="color: #f0f0f0; font-size: 13px;">💡 What it does:</strong>`;
-                    resultHTML += `<p style="color: #b0b0b0; margin: 4px 0 0 0; font-size: 12px; line-height: 1.4;">${currentQ.what_it_does}</p>`;
-                    resultHTML += `</div>`;
-                    
-                    resultHTML += `<div style="margin-bottom: 10px;">`;
-                    resultHTML += `<strong style="color: #f0f0f0; font-size: 13px;">🎯 Use cases:</strong>`;
-                    resultHTML += `<ul style="color: #b0b0b0; margin: 4px 0 0 0; padding-left: 16px; font-size: 12px; line-height: 1.3;">`;
-                    currentQ.use_cases.slice(0, 2).forEach(useCase => {
-                        resultHTML += `<li style="margin-bottom: 2px;">${useCase}</li>`;
-                    });
-                    resultHTML += `</ul></div>`;
-                    
-                    resultHTML += `<div style="margin-bottom: 10px;">`;
-                    resultHTML += `<strong style="color: #f0f0f0; font-size: 13px;">📝 Key insight:</strong>`;
-                    resultHTML += `<p style="color: #b0b0b0; margin: 4px 0 0 0; font-size: 12px; line-height: 1.4; font-style: italic;">${currentQ.best_practices}</p>`;
-                    resultHTML += `</div>`;
-                    
-                    resultHTML += `</div>`; // Close explanation section
-                    resultHTML += `</div>`; // Close question container
-                }
-            }
-            
-            resultHTML += `</div>`;
-            resultHTML += `<div style="text-align: center; margin-top: 30px;">`;
-            resultHTML += `<button class="btn btn-primary" onclick="restartQuiz()" style="padding: 12px 24px; font-size: 16px; margin-right: 12px;">🔄 Restart Quiz</button>`;
-            resultHTML += `<button class="btn btn-secondary" onclick="toggleDetailedView()" style="padding: 12px 24px; font-size: 16px;">📚 Toggle Full Details</button>`;
-            resultHTML += `</div>`;
-            
-            document.querySelector('.challenge-container').innerHTML = resultHTML;
-        }
-
-        // Restart quiz function
-        function restartQuiz() {
-            currentQuestionIndex = 0;
-            totalScore = 0;
-            questionsCompleted = [];
-            userAnswers = [];
-            location.reload();
+        
+        // Navigation Functions
+        function showHomepage() {
+            hideAll();
+            document.getElementById('homepage').classList.remove('hidden');
         }
         
-        // Toggle detailed view function for final results
-        function toggleDetailedView() {
-            const explanationSections = document.querySelectorAll('[style*="border-top: 1px solid #3d3d3d"]');
-            explanationSections.forEach(section => {
-                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        function showLessons() {
+            hideAll();
+            document.getElementById('lesson-list').classList.remove('hidden');
+            renderLessons();
+            updateProgress();
+        }
+        
+        function showLesson(lessonId) {
+            currentLesson = lessons.find(l => l.id === lessonId);
+            if (!currentLesson) return;
+            
+            hideAll();
+            document.getElementById('lesson-content').classList.remove('hidden');
+            renderLesson();
+        }
+        
+        function hideAll() {
+            document.getElementById('homepage').classList.add('hidden');
+            document.getElementById('lesson-list').classList.add('hidden');
+            document.getElementById('lesson-content').classList.add('hidden');
+            document.getElementById('explanation-phase').classList.remove('hidden');
+            document.getElementById('quiz-phase').classList.add('hidden');
+        }
+        
+        // Render Functions
+        function renderLessons() {
+            const container = document.getElementById('lessons-container');
+            container.innerHTML = '';
+            
+            lessons.forEach(lesson => {
+                const isUnlocked = !lesson.locked || userProgress.completed.includes(lesson.id - 1);
+                const isCompleted = userProgress.completed.includes(lesson.id);
+                
+                const lessonCard = document.createElement('div');
+                lessonCard.className = `bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105 slide-in ${
+                    isUnlocked ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'
+                }`;
+                
+                lessonCard.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">${lesson.emoji}</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${lesson.title}</h3>
+                        <p class="text-gray-600 mb-4">${lesson.concept}</p>
+                        <div class="flex items-center justify-center space-x-2">
+                            ${isCompleted ? 
+                                '<span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">✓ Completed</span>' :
+                                isUnlocked ?
+                                    '<span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Start</span>' :
+                                    '<span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-sm font-medium">🔒 Locked</span>'
+                            }
+                        </div>
+                    </div>
+                `;
+                
+                if (isUnlocked) {
+                    lessonCard.addEventListener('click', () => showLesson(lesson.id));
+                }
+                
+                container.appendChild(lessonCard);
             });
         }
-
-        // Start the game
-        initGame();
+        
+        function renderLesson() {
+            if (!currentLesson) return;
+            
+            document.getElementById('lesson-emoji').textContent = currentLesson.emoji;
+            document.getElementById('lesson-title').textContent = currentLesson.title;
+            document.getElementById('lesson-concept').textContent = currentLesson.concept;
+            document.getElementById('lesson-explanation').textContent = currentLesson.explanation;
+            document.getElementById('example-query').textContent = currentLesson.example_query;
+            document.getElementById('example-explanation').textContent = currentLesson.example_explanation;
+            
+            // Render sample data table
+            renderSampleData();
+            
+            // Render syntax breakdown
+            renderSyntaxBreakdown();
+        }
+        
+        function renderSampleData() {
+            if (!currentLesson) return;
+            
+            const tableData = sampleData[currentLesson.sampleTable];
+            const tableContainer = document.getElementById('data-table');
+            
+            if (!tableData || tableData.length === 0) {
+                tableContainer.innerHTML = '<p class="text-gray-500">No sample data available</p>';
+                return;
+            }
+            
+            const headers = Object.keys(tableData[0]);
+            
+            let tableHTML = `
+                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow">
+                    <thead class="bg-yellow-200">
+                        <tr>
+                            ${headers.map(header => `<th class="px-4 py-3 text-left font-semibold text-yellow-800 capitalize">${header}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            tableData.forEach((row, index) => {
+                tableHTML += `
+                    <tr class="${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">
+                        ${headers.map(header => `<td class="px-4 py-3 text-gray-700">${row[header]}</td>`).join('')}
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            
+            tableContainer.innerHTML = tableHTML;
+        }
+        
+        function renderSyntaxBreakdown() {
+            if (!currentLesson || !currentLesson.syntax_breakdown) return;
+            
+            const breakdownContainer = document.getElementById('breakdown-content');
+            breakdownContainer.innerHTML = '';
+            
+            currentLesson.syntax_breakdown.forEach(item => {
+                const breakdownItem = document.createElement('div');
+                breakdownItem.className = 'flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm';
+                
+                breakdownItem.innerHTML = `
+                    <div class="${item.color} text-white px-3 py-2 rounded-lg font-mono font-bold text-sm">
+                        ${item.part}
+                    </div>
+                    <div class="text-gray-700 flex-1">
+                        <span class="font-medium">${item.part}:</span> ${item.explanation}
+                    </div>
+                `;
+                
+                breakdownContainer.appendChild(breakdownItem);
+            });
+        }
+        
+        // Quiz Functions
+        function startQuiz() {
+            document.getElementById('explanation-phase').classList.add('hidden');
+            document.getElementById('quiz-phase').classList.remove('hidden');
+            setupQuiz();
+        }
+        
+        function setupQuiz() {
+            if (!currentLesson) return;
+            
+            const partsContainer = document.getElementById('quiz-parts');
+            const dropZone = document.getElementById('drop-zone');
+            
+            // Reset quiz state
+            droppedParts = [];
+            usedParts.clear();
+            document.getElementById('check-btn').disabled = true;
+            document.getElementById('result-message').classList.add('hidden');
+            document.getElementById('drop-hint').classList.remove('hidden');
+            
+            // Clear containers
+            partsContainer.innerHTML = '';
+            dropZone.innerHTML = '<div class="flex flex-wrap gap-2 justify-center items-center min-h-12"><p class="text-gray-500 text-center w-full" id="drop-hint">Drag query parts here (arrange horizontally)</p></div>';
+            
+            // Shuffle quiz parts
+            const shuffledParts = [...currentLesson.quiz_parts].sort(() => Math.random() - 0.5);
+            
+            // Create draggable parts - ALL START AS ACTIVE/ENABLED
+            shuffledParts.forEach((part, index) => {
+                const partElement = document.createElement('div');
+                partElement.className = `quiz-card ${part.color} text-white px-4 py-3 rounded-lg font-mono font-bold shadow-lg transition-all duration-300`;
+                partElement.textContent = part.text;
+                partElement.dataset.order = part.order;
+                partElement.dataset.text = part.text;
+                partElement.dataset.color = part.color;
+                partElement.id = `part-${part.text.replace(/\s+/g, '-')}`;
+                partsContainer.appendChild(partElement);
+            });
+            
+            // Setup Sortable for Available Parts - these get disabled when used
+            if (sortableInstance) {
+                sortableInstance.destroy();
+            }
+            
+            sortableInstance = Sortable.create(partsContainer, {
+                group: { name: 'quiz', pull: 'clone', put: false },
+                sort: false,
+                filter: '.disabled', // Prevent dragging disabled elements
+                preventOnFilter: false,
+                onStart: function(evt) {
+                    // Double-check: prevent dragging if already used
+                    if (usedParts.has(evt.item.dataset.text)) {
+                        return false;
+                    }
+                },
+                onClone: function(evt) {
+                    // Prevent cloning if part is already used (prevent duplicates)
+                    if (usedParts.has(evt.item.dataset.text)) {
+                        evt.preventDefault();
+                        return false;
+                    }
+                    // CRITICAL: Ensure cloned item (going to Build Query) is FULLY ACTIVE
+                    evt.clone.classList.remove('disabled', 'opacity-30', 'cursor-not-allowed');
+                    evt.clone.style.pointerEvents = 'auto';
+                    evt.clone.title = '';
+                    // Visual feedback for cloned item
+                    evt.clone.classList.add('opacity-75');
+                }
+            });
+            
+            // Setup Sortable for Build Query Area - ALWAYS STAYS ACTIVE
+            const dropZoneElement = dropZone.querySelector('div') || dropZone;
+            Sortable.create(dropZoneElement, {
+                group: 'quiz',
+                direction: 'horizontal',
+                animation: 200, // Smooth reordering animation
+                ghostClass: 'sortable-ghost',
+                chosenClass: 'sortable-chosen',
+                onAdd: function(evt) {
+                    // Hide the hint text
+                    const hint = document.getElementById('drop-hint');
+                    if (hint) hint.classList.add('hidden');
+                    
+                    const partText = evt.item.dataset.text;
+                    
+                    // Prevent duplicates - if somehow a duplicate gets through
+                    if (usedParts.has(partText)) {
+                        evt.item.remove();
+                        return;
+                    }
+                    
+                    const newPart = {
+                        text: partText,
+                        order: parseInt(evt.item.dataset.order)
+                    };
+                    
+                    droppedParts.push(newPart);
+                    usedParts.add(partText);
+                    
+                    // CRITICAL FIX: Ensure the dropped element in Build Query stays FULLY ACTIVE
+                    evt.item.classList.remove('disabled', 'opacity-30', 'cursor-not-allowed');
+                    evt.item.style.pointerEvents = 'auto';
+                    evt.item.title = '';
+                    
+                    // DISABLE ONLY the corresponding element in Available Parts (not the dropped one)
+                    const originalPart = document.getElementById(`part-${partText.replace(/\s+/g, '-')}`);
+                    if (originalPart && originalPart !== evt.item) {
+                        originalPart.classList.add('disabled', 'opacity-30', 'cursor-not-allowed');
+                        originalPart.style.pointerEvents = 'none';
+                        originalPart.title = 'This part is already used in your query';
+                    }
+                    
+                    // Enable check button
+                    document.getElementById('check-btn').disabled = droppedParts.length === 0;
+                },
+                onRemove: function(evt) {
+                    const partText = evt.item.dataset.text;
+                    droppedParts = droppedParts.filter(part => part.text !== partText);
+                    usedParts.delete(partText);
+                    
+                    // RE-ENABLE the corresponding element in Available Parts
+                    const originalPart = document.getElementById(`part-${partText.replace(/\s+/g, '-')}`);
+                    if (originalPart) {
+                        originalPart.classList.remove('disabled', 'opacity-30', 'cursor-not-allowed');
+                        originalPart.style.pointerEvents = 'auto';
+                        originalPart.title = '';
+                    }
+                    
+                    // Show hint if no parts left
+                    if (droppedParts.length === 0) {
+                        const hint = document.getElementById('drop-hint');
+                        if (hint) hint.classList.remove('hidden');
+                        document.getElementById('check-btn').disabled = true;
+                    }
+                },
+                onUpdate: function(evt) {
+                    // Handle reordering within Build Query area
+                    // Update the droppedParts array to match new DOM order
+                    const newOrder = [];
+                    Array.from(evt.to.children).forEach(child => {
+                        if (child.dataset && child.dataset.text) {
+                            const part = droppedParts.find(p => p.text === child.dataset.text);
+                            if (part) {
+                                newOrder.push(part);
+                            }
+                        }
+                    });
+                    droppedParts = newOrder;
+                    
+                    // Debug log for reordering
+                    console.log('🔄 Parts reordered:', droppedParts.map(p => p.text));
+                }
+            });
+        }
+        
+        function checkAnswer() {
+            if (!currentLesson || droppedParts.length === 0) return;
+            
+            // CRITICAL FIX: Get the actual sortable container and current order
+            const dropZone = document.getElementById('drop-zone');
+            const sortableContainer = dropZone.querySelector('div') || dropZone;
+            
+            // Get current elements in their DOM order (how user arranged them)
+            const currentElements = Array.from(sortableContainer.children)
+                .filter(child => child.dataset && child.dataset.order && child.dataset.text)
+                .map(child => ({
+                    text: child.dataset.text.trim(),
+                    order: parseInt(child.dataset.order)
+                }));
+            
+            // Get the correct order from lesson data
+            const correctOrder = currentLesson.quiz_parts
+                .sort((a, b) => a.order - b.order)
+                .map(part => part.text.trim());
+            
+            // Get user's current order (based on DOM position)
+            const userOrder = currentElements.map(el => el.text);
+            
+            // DEBUG LOGS for troubleshooting
+            console.log('🐛 DEBUG - User Order:', userOrder);
+            console.log('🐛 DEBUG - Correct Order:', correctOrder);
+            console.log('🐛 DEBUG - Arrays Match:', JSON.stringify(userOrder) === JSON.stringify(correctOrder));
+            
+            // Additional validation checks
+            const hasAllParts = userOrder.length === correctOrder.length;
+            const hasCorrectParts = correctOrder.every(part => userOrder.includes(part));
+            const isCorrectSequence = userOrder.every((text, index) => text === correctOrder[index]);
+            
+            // Check if arrays match exactly (length and sequence)
+            const isCorrect = hasAllParts && hasCorrectParts && isCorrectSequence;
+            
+            // Additional debug info
+            console.log('🐛 DEBUG - Has All Parts:', hasAllParts, `(${userOrder.length}/${correctOrder.length})`);
+            console.log('🐛 DEBUG - Has Correct Parts:', hasCorrectParts);
+            console.log('🐛 DEBUG - Correct Sequence:', isCorrectSequence);
+            console.log('🐛 DEBUG - Final Result:', isCorrect);
+            
+            const resultMessage = document.getElementById('result-message');
+            
+            if (isCorrect) {
+                // Success!
+                resultMessage.className = 'mt-6 text-center p-4 rounded-lg font-bold text-lg bg-green-100 text-green-800';
+                resultMessage.textContent = '🎉 Fantastic! You\'ve mastered this query! 🎉';
+                resultMessage.classList.remove('hidden');
+                
+                // Add to completed lessons
+                if (!userProgress.completed.includes(currentLesson.id)) {
+                    userProgress.completed.push(currentLesson.id);
+                    userProgress.xp += 100;
+                }
+                
+                // Unlock next lesson
+                if (currentLesson.id < lessons.length) {
+                    const nextLesson = lessons.find(l => l.id === currentLesson.id + 1);
+                    if (nextLesson) {
+                        nextLesson.locked = false;
+                    }
+                }
+                
+                // Confetti animation
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+                
+                // Add pulse animation to all dropped parts
+                Array.from(dropZone.children).forEach(child => {
+                    if (child.dataset.order) {
+                        child.classList.add('correct');
+                    }
+                });
+                
+                // Show continue button after a delay
+                setTimeout(() => {
+                    resultMessage.innerHTML += '<br><button onclick="showLessons()" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition-all duration-300">Continue Learning! 🚀</button>';
+                }, 2000);
+                
+            } else {
+                // Incorrect
+                resultMessage.className = 'mt-6 text-center p-4 rounded-lg font-bold text-lg bg-red-100 text-red-800';
+                
+                // Enhanced error message based on specific issue
+                let errorMessage = '🤔 Not quite right!';
+                
+                if (!hasAllParts) {
+                    if (userOrder.length < correctOrder.length) {
+                        errorMessage = '🔍 You\'re missing some parts! Make sure to drag all the required pieces.';
+                    } else {
+                        errorMessage = '👀 You have too many parts! You might have duplicates.';
+                    }
+                } else if (!hasCorrectParts) {
+                    errorMessage = '🔄 You have the right number of parts, but some are incorrect.';
+                } else if (!isCorrectSequence) {
+                    errorMessage = '🎢 You have all the right parts, but they\'re in the wrong order!';
+                }
+                
+                const debugInfo = `
+                    <div class="mb-4">
+                        <p class="text-lg font-bold mb-2">${errorMessage}</p>
+                        <p class="text-sm mb-3">Remember, SQL queries have a specific order!</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3 text-sm">
+                        <div class="mb-2"><strong>Your order:</strong> ${userOrder.length > 0 ? userOrder.join(' → ') : '(empty)'}</div>
+                        <div><strong>Correct order:</strong> ${correctOrder.join(' → ')}</div>
+                    </div>
+                `;
+                
+                resultMessage.innerHTML = debugInfo;
+                resultMessage.classList.remove('hidden');
+                
+                // Shake animation for incorrect parts
+                Array.from(dropZone.children).forEach(child => {
+                    if (child.dataset.order) {
+                        child.style.animation = 'shake 0.5s ease-in-out';
+                        setTimeout(() => {
+                            child.style.animation = '';
+                        }, 500);
+                    }
+                });
+            }
+        }
+        
+        function updateProgress() {
+            document.getElementById('xp-display').textContent = userProgress.xp;
+            const progressPercentage = Math.min((userProgress.completed.length / lessons.length) * 100, 100);
+            document.getElementById('progress-bar').style.width = progressPercentage + '%';
+        }
+        
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 20%, 40%, 60%, 80%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            showHomepage();
+        });
     </script>
 </body>
 </html>
